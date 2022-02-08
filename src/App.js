@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Login from './pages/login/Login';
+import Signup from './pages/signup/Signup';
 
 import {
   BrowserRouter as Router,
@@ -15,6 +16,7 @@ function App() {
      <Router>
        <Switch>
          <Route path="/login" component={Login} />
+         <Route path="/signup" component={Signup} />
        </Switch>
      </Router> 
     </div>
