@@ -7,43 +7,43 @@ import { Component } from 'react';
 export class Login extends Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
-       EmailId:'',
-       Password:'',
-       EmailIdError: false,
-       PasswordError: false
+      EmailId: '',
+      Password: '',
+      EmailIdError: false,
+      PasswordError: false
 
     }
   }
 
-  validation =()=>{
-    let isError= false;
+  validation = () => {
+    let isError = false;
     const error = this.state;
-    error.EmailIdError = this.state.EmailId === ''? true : false;
-    error.PasswordError= this.state.Password === '' ? true : false;
+    error.EmailIdError = this.state.EmailId === '' ? true : false;
+    error.PasswordError = this.state.Password === '' ? true : false;
 
     this.setState({
-        ...error
+      ...error
     })
-    
-    return isError = error.EmailIdError || error.PasswordError ;
 
-}
+    return isError = error.EmailIdError || error.PasswordError;
 
-next=()=>{
-    var validated  = this.validation();
-    if(validated){
-        console.log("validation done")
+  }
+
+  next = () => {
+    var validated = this.validation();
+    if (validated) {
+      console.log("validation done")
     }
-}
+  }
 
-changeHandle = (e) => {
-  this.setState({
-    [e.target.name]: e.target.value,
-  });
-};
-  
+  changeHandle = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
   render() {
     return (
       <div className="login-container">
@@ -65,8 +65,8 @@ changeHandle = (e) => {
           </div>
 
           <div className="section-2">
-            <TextField  name="EmailId" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.EmailIdError} helperText={this.state.EmailIdError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)}/>
-            <TextField name="Password" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Password" variant="outlined" error={this.state.PasswordError} helperText={this.state.PasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)}/>
+            <TextField name="EmailId" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.EmailIdError} helperText={this.state.EmailIdError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
+            <TextField name="Password" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Password" variant="outlined" error={this.state.PasswordError} helperText={this.state.PasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
           </div>
 
           <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={this.next}> Login </button>

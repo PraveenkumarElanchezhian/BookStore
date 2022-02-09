@@ -11,7 +11,7 @@
         z-index: 1;
         position: absolute;
         width:50%;
-        height:60%;
+        height:70%;
         display:flex;
         padding:20px;
         flex-direction:row;
@@ -38,7 +38,7 @@
         z-index: 2;
         position: absolute;
         width:25%;
-        height:70%;
+        height:80%;
         display:flex;
         padding:20px;
         margin-left: 400px;
@@ -76,7 +76,7 @@
                 margin-top:0px
             }
             .pass-npt{
-                margin-top:25px;
+                margin-top:20px;
             }
         }
 
@@ -89,14 +89,14 @@
                 margin-top:0px
             }
             .pass-npt{
-                margin-top:25px;
+                margin-top:20px;
             }
         }
 
         .login-btn{
             width:80%;
-            height: 40px;
-            margin-top:25px;
+            height: 10%;
+            margin-top:20px;
             color:#fff;
             border-radius: 5px;
         }
