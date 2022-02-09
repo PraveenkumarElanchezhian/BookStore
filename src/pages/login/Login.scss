@@ -18,7 +18,7 @@
         align-items:center;
         justify-content:center;
         border:1px solid lightgray;
-        border-radius:10px;
+        border-radius:20px;
         background-color:#fff;
         .Image-left{
             width:50%;
@@ -46,21 +46,24 @@
         align-items:center;
         justify-content:center;
         border:1px solid lightgray;
-        border-radius:5px;
+        border-radius:10px;
         background-color:#fff;
 
         .section-1{
-            display:flex;
-            justify-content:space-around;
-            width:100%;
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
             height: 20%;
             .heading{
-                width:50%;
+                width:40%;
                 font-size: large;
+                display: flex;
             }
             .headings{
-                width:50%;
+                width:40%;
                 font-size: large;
+                display: flex;
+                justify-content: flex-end;
             }
         }
         .section-2{
