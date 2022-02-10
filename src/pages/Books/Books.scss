@@ -1,0 +1,109 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    margin: 0vh 6vw;
+    .main-card{
+        margin: 15px;
+        width: 200px;
+        height: 220px;
+        box-shadow: -1px -1px 4px gray;
+        border: lightgray;
+        border-radius: 4px;
+// .card{
+    // margin: 15px;
+    // width: 200px;
+    // height: 220px;
+    // box-shadow: -1px -1px 4px gray;
+    // border: lightgray;
+    // border-radius: 4px;
+    
+    span{
+        display: block;
+        margin: .4vh 0vw;  
+    }
+    .book-container{
+        background-color:#F5F5F5;
+        height: 120px;
+
+        .image{
+            height: 100px;
+            margin: 2vh 0vw 2vh 0vw;   
+        }
+
+    }
+
+    .text-containt{
+        margin: 2vh 0vw 0vh 1vw ;
+        width: 85%;  
+        .title{
+            text-align: left;
+            #title1{
+                font: normal normal normal 14px Roboto;
+                letter-spacing: 0px;
+                color: #0A0102;
+            }
+            #title2{
+                font: normal normal normal 10px Roboto;
+                letter-spacing: 0px;
+                color: #878787;         
+            }
+            .rating{
+                display: flex;
+                text-align: center;
+                #number1{
+                    background-color: #388E3C;
+                    color: white;
+                    letter-spacing: 0px;
+                    font-size: 12px;
+                    width: 30px;
+                }
+                #number2{     
+                    color:#878787;
+                    letter-spacing: 0px;
+                    font-size: 10px;
+                }
+            }
+            .price-container{
+                display: flex;
+                text-align: center;
+                width: 75px;
+                #rs{
+                    font-weight: bold;
+                   font-size:12px;
+                }
+                #new-price{
+                    font-weight: bold;
+                    font-size:12px; 
+                }
+                #old-price{
+                    color: #878787;
+                    font-size:10px;
+                    text-decoration: line-through; 
+                }
+            }
+
+            .bottom-button{
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                
+                .button-left{
+                    background-color: #8F2B2F;
+                    color: #fff;
+                    font-size: small;
+                    border: 8F2B2F;
+                    border-radius: 3px;
+                }
+                .button-right{
+                    background-color: #F5F5F5;
+                    font-size: x-small;
+                    border: F5F5F5;
+                    border-radius: 3px;
+                }
+            }
+        
+        }
+    }
+
+    }
+}

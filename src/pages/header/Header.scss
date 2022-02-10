@@ -1,0 +1,57 @@
+*{
+    margin: 0px;
+    padding: 0px;
+
+    p{
+        color: #FFFFFF;
+    }
+
+    .head-container{
+      
+        .headbar{
+            background-color: #A03037;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+           .book-title{
+               display: flex;
+               width: 9%;     
+           }
+           .search-bar{
+               .search{
+                   border: none;
+                   width: 400px;
+                   height: 25px;
+                   border-radius: 5px;
+               }
+           }
+
+           .right-icons{
+               display: flex;
+               width: 15%;
+               justify-content: space-around;
+           .name{
+               justify-content: center;
+            #profile-name{
+                margin: -1vh 0vw 0vh 0vw;
+            }
+           }
+
+           .cart{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+               #cart-name{
+                margin: -1vh 0vw 0vh 0vw;
+               }
+           }
+          }
+        }
+
+        .bookList{
+            display: grid;
+            grid-template-columns: repeat(5,1fr);
+        }
+    }
+}

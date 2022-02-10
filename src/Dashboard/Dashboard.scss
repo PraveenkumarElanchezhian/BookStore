@@ -1,0 +1,27 @@
+.dash-container{
+    .second-header{
+        height: 60px;
+        width: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0vh 7vw;
+
+        .book{
+            font-weight: bold;
+            text-align: left;
+            font: normal normal normal 20px Roboto;
+            letter-spacing: 0px;
+            color: #0A0102;
+        }
+        .quantity{
+            font-size: 10px;
+        }
+        #dropdown{
+            border: 1px solid #E2E2E2;
+            border-radius: 1px;   
+        }
+       
+
+    }
+}

@@ -37,7 +37,7 @@ export class Signup extends Component {
 
   }
 
-  next = () => {
+  Signup = () => {
     var validated = this.validation();
     if (validated) {
       console.log("validation done")
@@ -78,7 +78,7 @@ export class Signup extends Component {
             <TextField name="mobileNumber" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Mobile Number" variant="outlined" error={this.state.mobileNumberError} helperText={this.state.EmailIdError ? "Enter a mobile number" : " "} onChange={(e) => this.changeHandle(e)}/>
           </div>
 
-          <button className='login-btn' style={{ backgroundColor: '#A03037' }} onClick={this.next}> Signup </button>
+          <button className='login-btn' style={{ backgroundColor: '#A03037' }} onClick={this.Signup}> Signup </button>
 
         </div>
       </div>

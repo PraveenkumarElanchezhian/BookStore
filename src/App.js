@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import Dashboard from './Dashboard/Dashboard';
 
 import {
   BrowserRouter as Router,
@@ -17,6 +18,7 @@ function App() {
        <Switch>
          <Route path="/login" component={Login} />
          <Route path="/signup" component={Signup} />
+         <Route path="/dashboard" component={Dashboard} />
        </Switch>
      </Router> 
     </div>

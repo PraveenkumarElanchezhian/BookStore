@@ -1,5 +1,5 @@
 import React from 'react';
-import './Login.scss'
+import './Login.scss';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { Component } from 'react';
@@ -31,7 +31,7 @@ export class Login extends Component {
 
   }
 
-  next = () => {
+  login = () => {
     var validated = this.validation();
     if (validated) {
       console.log("validation done")
@@ -61,6 +61,7 @@ export class Login extends Component {
 
           <div className="section-1">
             <h1 className="heading">LOGIN</h1>
+            
             <h1 className="headings">SIGNUP</h1>
           </div>
 
@@ -69,7 +70,7 @@ export class Login extends Component {
             <TextField name="Password" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Password" variant="outlined" error={this.state.PasswordError} helperText={this.state.PasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
           </div>
 
-          <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={this.next}> Login </button>
+          <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={this.login}> Login </button>
 
           <p className='strick'>-----------OR-----------</p>
 
