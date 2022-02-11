@@ -84,21 +84,24 @@
 
             .bottom-button{
                 display: flex;
+                width: 100%;
                 justify-content: space-between;
-                flex-direction: row;
-                
-                .button-left{
-                    background-color: #8F2B2F;
-                    color: #fff;
-                    font-size: small;
-                    border: 8F2B2F;
+                .button-left{  
+                    width: 40%;  
+                    height: 25px;
+                    background-color: #A03037;
+                    border: 0px;
                     border-radius: 3px;
+                    color:white;
+                    font-size: x-small;
                 }
                 .button-right{
-                    background-color: #F5F5F5;
-                    font-size: x-small;
-                    border: F5F5F5;
+                    width: 40%;
+                    height: 25px;
+                    background-color: white;
+                    border : 2px solid #8b8888;
                     border-radius: 3px;
+                    font-size: x-small;
                 }
             }
         
