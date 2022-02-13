@@ -5,7 +5,7 @@ class AxiosService {
     postMethod(url, data){
         return axios.post(url, data)
     }
-    getsMethod(url, data, headers = false){
+    getMethod(url, data, headers = false){
         return axios.get(url, data, headers)
     }
     deleteMethod(url, data,headers ){

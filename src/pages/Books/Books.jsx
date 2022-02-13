@@ -51,28 +51,9 @@ export class Books extends Component {
                                         <span id='new-price'>1500</span>
                                         {/* <span id='old-price'></span> */}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="main-card">
-                        <div className='card' className='displayGrid' >
-                            <div className="book-container">
-                                <img className="image" src={book2} alt='book image'/>
-                            </div>
-                            <div className="text-containt">
-                                <div className="title">
-                                    <span id='title1'>Don't Make Me Think</span>
-                                    <span id='title2'>by Steve Krug</span>
-                                    {/* <div className="rating">
-                                        <span id='number1'>4.5*</span>
-                                        <span id='number2'>(20)</span>
-                                    </div> */}
-                                    <div className="price-container">
-                                        <span id='rs'>Rs.</span>
-                                        <span id='new-price'>1500</span>
-                                        {/* <span id='old-price'></span> */}
+                                    <div className='bottom-button'>
+                                        <button className='button-left'>ADD TO BAG</button>
+                                        <button className='button-right'>WISHLIST</button>
                                     </div>
                                 </div>
                             </div>
@@ -97,28 +78,9 @@ export class Books extends Component {
                                         <span id='new-price'>1500</span>
                                         {/* <span id='old-price'></span> */}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="main-card">
-                        <div className='card' className='displayGrid' >
-                            <div className="book-container">
-                                <img className="image" src={book2} alt='book image'/>
-                            </div>
-                            <div className="text-containt">
-                                <div className="title">
-                                    <span id='title1'>Don't Make Me Think</span>
-                                    <span id='title2'>by Steve Krug</span>
-                                    {/* <div className="rating">
-                                        <span id='number1'>4.5*</span>
-                                        <span id='number2'>(20)</span>
-                                    </div> */}
-                                    <div className="price-container">
-                                        <span id='rs'>Rs.</span>
-                                        <span id='new-price'>1500</span>
-                                        {/* <span id='old-price'></span> */}
+                                    <div className='bottom-button'>
+                                        <button className='button-left'>ADD TO BAG</button>
+                                        <button className='button-right'>WISHLIST</button>
                                     </div>
                                 </div>
                             </div>
@@ -143,28 +105,9 @@ export class Books extends Component {
                                         <span id='new-price'>1500</span>
                                         {/* <span id='old-price'></span> */}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="main-card">
-                        <div className='card' className='displayGrid' >
-                            <div className="book-container">
-                                <img className="image" src={book2} alt='book image'/>
-                            </div>
-                            <div className="text-containt">
-                                <div className="title">
-                                    <span id='title1'>Don't Make Me Think</span>
-                                    <span id='title2'>by Steve Krug</span>
-                                    {/* <div className="rating">
-                                        <span id='number1'>4.5*</span>
-                                        <span id='number2'>(20)</span>
-                                    </div> */}
-                                    <div className="price-container">
-                                        <span id='rs'>Rs.</span>
-                                        <span id='new-price'>1500</span>
-                                        {/* <span id='old-price'></span> */}
+                                    <div className='bottom-button'>
+                                        <button className='button-left'>ADD TO BAG</button>
+                                        <button className='button-right'>WISHLIST</button>
                                     </div>
                                 </div>
                             </div>
@@ -188,6 +131,10 @@ export class Books extends Component {
                                         <span id='rs'>Rs.</span>
                                         <span id='new-price'>1500</span>
                                         {/* <span id='old-price'></span> */}
+                                    </div>
+                                    <div className='bottom-button'>
+                                        <button className='button-left'>ADD TO BAG</button>
+                                        <button className='button-right'>WISHLIST</button>
                                     </div>
                                 </div>
                             </div>

@@ -27,8 +27,6 @@ export class Dashboard extends Component {
                 <div className='bookList'>
                     <div>
                         <Books />
-                        {/* <HowerBook /> */}
-
                     </div>
                 </div>
 

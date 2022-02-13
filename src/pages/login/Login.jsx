@@ -3,6 +3,7 @@ import './Login.scss';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { Component } from 'react';
+import logo from '../../Images/logo.png';
 import UserService from '../../Service/UserService';
 const service = new UserService();
 
@@ -50,6 +51,7 @@ export class Login extends Component {
       service.login(data)
       .then(res=>{
         console.log(res);
+        // localStorage.setItem('token',res.data)
     })
     .catch(err=>{
         console.log(err);
@@ -77,7 +79,7 @@ export class Login extends Component {
       <div className="login-container">
         <div className="Image-container">
           <div className="Image-left">
-            <img className="Image-dimension" src='https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A7b0eeb81-a918-4f41-9bc2-f508474e79ce&params=version%3A0&token=1644370240_da39a3ee_b43dfffc5713010c64d0af51433118d1fc13ba79&api_key=CometServer1' />
+            <img className="Image-dimension" src={logo} alt='image logo'/>
             <h4>ONLINE BOOK SHOPPING</h4>
           </div>
           <div className="Image-Right">
@@ -86,7 +88,7 @@ export class Login extends Component {
         </div>
         {
           this.state.openPage ?
-            <div className="login"  /* onClick={this.handleOpen} */ >
+            <div className="login" /* onClick={this.handleOpen} */ >
 
               <div className="section-1">
                 <h1 className="heading">LOGIN</h1>
@@ -110,7 +112,7 @@ export class Login extends Component {
 
             </div>
             :
-            <div className="signup" /* onClick={this.handleClose} */ >  
+            <div className="signup" /* onClick={this.handleClose} */>  
 
               <div className="signup-section-1">
                 <h1 className="signup-heading">LOGIN</h1>
