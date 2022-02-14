@@ -38,7 +38,7 @@ export class Signup extends Component {
 
   }
 
-  Signup=()=>{
+  Signup = () => {
     var validated = this.validation();
     if (!validated) {
       console.log("validation done")
@@ -53,10 +53,11 @@ export class Signup extends Component {
       service.Signup(data)
         .then(res => {
           console.log(res);
+          window.open("/login", "_self");
         })
         .catch(err => {
           console.log(err);
-      })
+        })
     }
   }
 

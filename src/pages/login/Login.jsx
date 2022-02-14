@@ -12,11 +12,19 @@ export class Login extends Component {
     super(props)
 
     this.state = {
+      openPage: true,
+      loginemail: '',
+      loginpassword: '',
+      loginemailError: false,
+      loginpasswordError: false,
+      fullName: '',
+      phone: '',
       email: '',
       password: '',
+      fullNameError: false,
+      phoneError: false,
       emailError: false,
-      passwordError: false,
-      openPage: true
+      passwordError: false
     }
   }
 
@@ -26,52 +34,89 @@ export class Login extends Component {
     });
   };
 
-  handleOpen = () => {
+  loginvalidation = () => {
+    let isError = false;
+    const error = this.state;
+    error.loginemailError = this.state.loginemail === '' ? true : false;
+    error.loginpasswordError = this.state.loginpassword === '' ? true : false;
     this.setState({
-      openPage: false,
+      ...error
     })
+
+    return isError = error.loginemailError || error.loginpasswordError;
+
   }
 
-  handleClose = () => {
-    this.setState({
-      openPage: true,
-    })
-  }
-
-  login=()=>{
-    var validated = this.validation();
-    if (!validated) {
-      console.log("validation done");
-
-      let data = {
-        "email": this.state.email,
-        "password": this.state.password,
-      }
-
-      service.login(data)
-      .then(res=>{
-        console.log(res);
-        // localStorage.setItem('token',res.data)
-    })
-    .catch(err=>{
-        console.log(err);
-    })
-    }
-  }
-
-  
-  validation = () => {
+  signupvalidation = () => {
     let isError = false;
     const error = this.state;
     error.emailError = this.state.email === '' ? true : false;
     error.passwordError = this.state.password === '' ? true : false;
+    error.fullNameError = this.state.fullName === '' ? true : false;
+    error.phoneError = this.state.phone === '' ? true : false;
 
     this.setState({
       ...error
     })
 
-    return isError = error.emailError || error.passwordError;
+    return isError = error.fullNameError || error.phoneError || error.emailError || error.passwordError;
 
+  }
+
+
+  handleOpen = () => {
+    this.setState({
+      openPage: true,
+    })
+  }
+
+  handleClose = () => {
+    this.setState({
+      openPage: false,
+    })
+  }
+
+  login = () => {
+    var validated = this.loginvalidation();
+    if (!validated) {
+
+      let data = {
+        "email": this.state.loginemail,
+        "password": this.state.loginpassword,
+      }
+
+      service.login(data)
+        .then(res => {
+          console.log("response");
+          console.log(res);
+          window.open("/dashboard", "_self");
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
+  }
+
+  Signup = () => {
+    var validated = this.signupvalidation();
+    if (!validated) {
+
+      let data = {
+        "fullName": this.state.fullName,
+        "email": this.state.email,
+        "password": this.state.password,
+        "phone": this.state.phone
+      }
+
+      service.Signup(data)
+        .then(res => {
+          console.log(res);
+          window.open("/login", "_self");
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
   }
 
   render() {
@@ -79,7 +124,7 @@ export class Login extends Component {
       <div className="login-container">
         <div className="Image-container">
           <div className="Image-left">
-            <img className="Image-dimension" src={logo} alt='image logo'/>
+            <img className="Image-dimension" src={logo} alt='image logo' />
             <h4>ONLINE BOOK SHOPPING</h4>
           </div>
           <div className="Image-Right">
@@ -88,17 +133,17 @@ export class Login extends Component {
         </div>
         {
           this.state.openPage ?
-            <div className="login" /* onClick={this.handleOpen} */ >
+            <div className="login">
 
               <div className="section-1">
-                <h1 className="heading">LOGIN</h1>
+                <h1 className="heading" onClick={this.handleOpen}>LOGIN</h1>
 
-                <h1 className="headings">SIGNUP</h1>
+                <h1 className="headings" onClick={this.handleClose}>SIGNUP</h1>
               </div>
 
               <div className="section-2">
-                <TextField name="email" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.emailError} helperText={this.state.emailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="password" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.passwordError} helperText={this.state.passwordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="loginemail" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="loginpassword" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
               </div>
 
               <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.login(event)}> Login </button>
@@ -112,24 +157,24 @@ export class Login extends Component {
 
             </div>
             :
-            <div className="signup" /* onClick={this.handleClose} */>  
+            <div className="signup">
 
               <div className="signup-section-1">
-                <h1 className="signup-heading">LOGIN</h1>
-                <h1 className="signup-headings">SIGNUP</h1>
+                <h1 className="signup-heading" onClick={this.handleOpen}>LOGIN</h1>
+                <h1 className="signup-headings" onClick={this.handleClose}>SIGNUP</h1>
               </div>
 
               <div className="signup-section-2">
-                <TextField name="fullName" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="FullName" variant="outlined" error={this.state.fullNameError} helperText={this.state.emailError ? "Enter a fullname" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="fullName" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="FullName" variant="outlined" error={this.state.fullNameError} helperText={this.state.fullNameError ? "Enter a fullname" : " "} onChange={(e) => this.changeHandle(e)} />
                 <TextField name="email" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.emailError} helperText={this.state.emailError ? "Enter an email" : " "} onChange={(e) => this.changeHandle(e)} />
               </div>
 
               <div className="signup-section-3">
-                <TextField name="password" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.passwordError} helperText={this.state.emailError ? "Enter a password" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="mobileNumber" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Mobile Number" variant="outlined" error={this.state.mobileNumberError} helperText={this.state.emailError ? "Enter a mobile number" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="password" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.passwordError} helperText={this.state.passwordError ? "Enter a password" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="phone" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Mobile Number" variant="outlined" error={this.state.phoneError} helperText={this.state.phoneError ? "Enter a mobile number" : " "} onChange={(e) => this.changeHandle(e)} />
               </div>
 
-              <button className='login-btn' style={{ backgroundColor: '#A03037' }} onClick={this.Signup}> Signup </button>
+              <button className='login-btn' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.Signup(event)}> Signup </button>
 
             </div>
         }

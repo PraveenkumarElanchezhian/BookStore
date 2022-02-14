@@ -54,7 +54,7 @@ function HeadBar() {
             <div className="headbar">
                 <div className="book-title">
                     <MenuBookOutlinedIcon style={{ color: 'white' }} />
-                    <p> Bookstore</p>
+                    <p className='cont1'> Bookstore</p>
                 </div>
 
                 <div className="search-bar">

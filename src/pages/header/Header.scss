@@ -16,7 +16,10 @@
             justify-content: space-around;
            .book-title{
                display: flex;
-               width: 9%;     
+               width: 10%;   
+               .cont1{
+                margin-left: 10px;
+               }  
            }
            .search-bar{
                .search{
@@ -43,8 +46,9 @@
                 align-items: center;
                 justify-content: center;
                #cart-name{
-                margin: -1vh 0vw 0vh 0vw;
-               }
+                margin-right: 10px;
+            //     margin: -1vh 0vw 0vh 0vw;
+                }
            }
           }
         }

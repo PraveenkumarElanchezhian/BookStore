@@ -5,7 +5,13 @@ import Header from '../pages/header/Header';
 import Books from '../pages/Books/Books';
 
 export class Dashboard extends Component {
+constructor(props) {
+  super(props)
 
+  this.state = {
+     
+  }
+}
     render() {
         return (
             <div className="dash-container">
@@ -26,7 +32,7 @@ export class Dashboard extends Component {
                 </div>
                 <div className='bookList'>
                     <div>
-                        <Books />
+                        <Books/>
                     </div>
                 </div>
 
