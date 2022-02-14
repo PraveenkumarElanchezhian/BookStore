@@ -3,6 +3,7 @@ import './App.css';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import Dashboard from './Dashboard/Dashboard';
+import MyCart from './pages/cart/MyCart';
 
 import {
   BrowserRouter as Router,
@@ -19,6 +20,7 @@ function App() {
          <Route path="/login" component={Login} />
          <Route path="/signup" component={Signup} />
          <Route path="/dashboard" component={Dashboard} />
+         <Route path="/myCart" component={MyCart} />
        </Switch>
      </Router> 
     </div>

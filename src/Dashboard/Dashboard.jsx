@@ -9,13 +9,20 @@ constructor(props) {
   super(props)
 
   this.state = {
-     
+     cartCount:0
   }
 }
+
+ childToParent = (item) => {
+    this.setState({
+        cartCount: item.length
+    })
+  }
+
     render() {
         return (
             <div className="dash-container">
-                <Header />
+                <Header parentToChild={this.state.cartCount}/>
 
                 <div className='second-header'>
                     <div className='left-title'>
@@ -32,7 +39,7 @@ constructor(props) {
                 </div>
                 <div className='bookList'>
                     <div>
-                        <Books/>
+                        <Books childToParent={this.childToParent}/>
                     </div>
                 </div>
 

@@ -9,9 +9,32 @@ export class Books extends Component {
         super(props)
 
         this.state = {
-            booklistArray: []
+            booklistArray: [],
+            addedtoBag: []
+
         }
         this.getbooklist();
+    }
+
+    addBooktoCart = (item) => {
+        let result = this.state.booklistArray.find(i => i._id == item)
+        this.state.addedtoBag.push(result)
+        this.props.childToParent(this.state.addedtoBag)
+
+        let data ={
+            "product_id":item,
+            
+        }
+        service.addCart(data)
+            .then(res => {
+                this.setState({
+                    booklistArray: res.data
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
     }
 
     getbooklist = () => {
@@ -25,6 +48,9 @@ export class Books extends Component {
                 console.log(err);
             })
     }
+    itemisexists = (data) => {
+        return this.state.addedtoBag.some(item => data._id === item._id)
+    }
 
     changeHandle = (e) => {
         this.setState({
@@ -35,37 +61,42 @@ export class Books extends Component {
     render() {
         return (
             <div className='body'>
-                 {this.state.booklistArray.map((item, index) => (
-                <div className='grid-container'>
-                    <div className="main-card">
-                        <div className='card' className='displayGrid' >
-                            <div className="book-container">
-                                <img className="image" src={book2} alt='book image' />
-                            </div>
-                            <div className="text-containt">
-                                <div className="title">
-                                    <span id='title1'>{item.bookName}</span>
-                                    <span id='title2'>{item.author}</span>
-                                    {/* <div className="rating">
+                {this.state.booklistArray.map((item, index) => (
+                    <div className='grid-container'>
+                        <div className="main-card">
+                            <div className='card' className='displayGrid' >
+                                <div className="book-container">
+                                    <img className="image" src={book2} alt='book image' />
+                                </div>
+                                <div className="text-containt">
+                                    <div className="title">
+                                        <span id='title1'>{item.bookName}</span>
+                                        <span id='title2'>{item.author}</span>
+                                        {/* <div className="rating">
                                         <span id='number1'>4.5*</span>
                                         <span id='number2'>(20)</span>
                                     </div> */}
-                                    <div className="price-container">
-                                        <span id='rs'>Rs.</span>
-                                        <span id='new-price'>{item.price}</span>
-                                        {/* <span id='old-price'></span> */}
-                                    </div>
-                                    <div className='bottom-button'>
-                                        <button className='button-left' onClick={(event) => this.getbooklist(event)}>ADD TO BAG</button>
-                                        <button className='button-right'>WISHLIST</button>
-                                        {/* <button className='button'>ADDED TO BAG</button>*/}
+                                        <div className="price-container">
+                                            <span id='rs'>Rs.</span>
+                                            <span id='new-price'>{item.price}</span>
+                                            {/* <span id='old-price'></span> */}
+                                        </div>
+                                        <div>{
+                                            this.itemisexists(item) == false ?
+                                                <div className='bottom-button'>
+                                                    <button className='button-left' value={item._id} onClick={(event) => this.addBooktoCart(event.target.value)}>ADD TO BAG</button>
+                                                    <button className='button-right'>WISHLIST</button>
+                                                </div>
+                                                :
+                                                <button className='button'>ADDED TO BAG</button>
+                                        }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                 ))}
+                ))}
             </div>
 
         )
