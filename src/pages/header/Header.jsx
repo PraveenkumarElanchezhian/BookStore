@@ -56,6 +56,10 @@ export class Header extends Component {
    console.log(this.props.parentToChild);
    
 }
+
+openMyCart=()=>{
+   window.open("/myCart", "_self");
+}
   render() {
     return (
       <div className="head-container">
@@ -75,8 +79,8 @@ export class Header extends Component {
 
                 <div className="right-icons">
                     <div className="cart">
-                        <p id="cart-name"> cart </p>
-                        <ShoppingCartOutlinedIcon style={{ color: 'white' }} />
+                        <p id="cart-name" > cart </p>
+                        <ShoppingCartOutlinedIcon style={{ color: 'white' }} onClick={this.openMyCart}/>
                         <p>{this.props.parentToChild}</p>
                     </div>
                 </div>

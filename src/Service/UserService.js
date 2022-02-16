@@ -21,7 +21,7 @@ class UserService {
         return axiosservice.getMethod(`${baseUrl}/bookstore_user/get/book`,data,header);
     }
     addCart(data){
-        return axiosservice.postMethod(`${baseUrl}/bookstore_user/add_cart_item`,data,header);
+        return axiosservice.postMethod(`${baseUrl}/bookstore_user/add_cart_item/${data.product_id}`,{},header);
     }
     getCart(data){
         return axiosservice.getMethod(`${baseUrl}/bookstore_user/get_cart_items`,data,header);

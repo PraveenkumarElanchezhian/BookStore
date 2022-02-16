@@ -89,7 +89,7 @@ export class Login extends Component {
         .then(res => {
           console.log("response");
           console.log(res);
-          window.open("/dashboard", "_self");
+          // window.open("/dashboard", "_self");
         })
         .catch(err => {
           console.log(err);
