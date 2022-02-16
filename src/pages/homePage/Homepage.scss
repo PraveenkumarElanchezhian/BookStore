@@ -6,27 +6,77 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        margin-top: 50px;
+        margin-top: 30px;
        .section-1{ 
            align-items: center;
            justify-content: center;
-           
+           .image1{
+            margin-top: 20px;
+           }
+           .conts1{
+            margin-top: 20px;
+           }
+           .image2{
+            margin-top: 20px;
+           }
+           .const2{
+
+           }
        }
        .section-2{
-        width: 50%;
+        width: 100%;
         align-items: center;
         justify-content: center;
-        border: 1px solid lightgray;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
         .contents1{
-           justify-content: space-between;
+            width: 50%;
+            height: 40px;
+            align-items: center;
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid lightgray;
+            .email{
+              
+            }
+            .contact{
+
+            }
+            .Address{
+
+            }
         }
         .contents2{
-            justify-content: space-between;
+            width: 50%;
+            height: 50px;
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            border: 1px solid lightgray;
+            .email_d{
+                width: 50%;
+                height: 50px;
+                border: 1px solid lightgray;
+                justify-content: center;
+                align-items: center;
+            }
+            .contact_d{
+                width: 50%;
+                height: 50px;
+                border: 1px solid lightgray;
+            }
+            .Address_d{
+                width: 50%;
+                height: 50px;
+                border: 1px solid lightgray;
+            }
          }
        }
        .section-3{
         width: 100%;
-        justify-content: end;
+        margin-top: 20px;
            .buttonq{
             width: 15%;  
             height: 30px;

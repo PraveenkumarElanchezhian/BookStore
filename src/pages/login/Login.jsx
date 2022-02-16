@@ -87,9 +87,8 @@ export class Login extends Component {
 
       service.login(data)
         .then(res => {
-          console.log("response");
-          console.log(res);
-          // window.open("/dashboard", "_self");
+          localStorage.setItem('token',res.data.result.accessToken)
+          window.open("/dashboard", "_self");
         })
         .catch(err => {
           console.log(err);
@@ -142,8 +141,8 @@ export class Login extends Component {
               </div>
 
               <div className="section-2">
-                <TextField name="loginemail" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="loginpassword" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="loginemail" className="email-box"  type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="loginpassword" className="pass-box"  style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
               </div>
 
               <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.login(event)}> Login </button>

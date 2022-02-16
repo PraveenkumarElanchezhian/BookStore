@@ -5,6 +5,7 @@ import Signup from './pages/signup/Signup';
 import Dashboard from './Dashboard/Dashboard';
 import MyCart from './pages/cart/MyCart';
 import Homepage from './pages/homePage/Homepage';
+import Wishlist from './pages/wishlist/Wishlist';
 
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ function App() {
          <Route path="/dashboard" component={Dashboard} />
          <Route path="/myCart" component={MyCart} />
          <Route path="/homepage" component={Homepage} />
+         <Route path="/wishlist" component={Wishlist} />
        </Switch>
      </Router> 
     </div>

@@ -40,14 +40,24 @@
                 margin: -1vh 0vw 0vh 0vw;
             }
            }
-
+           .user{
+            display: flex;
+            height: 50px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+               #user-name{
+                margin: -1vh 0vw 0vh 0vw;
+               }
+           }
            .cart{
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
                #cart-name{
-                margin-right: 10px;
-            //     margin: -1vh 0vw 0vh 0vw;
+                // margin-right: 10px;
+                margin: -1vh 0vw 0vh 0vw;
                 }
            }
           }

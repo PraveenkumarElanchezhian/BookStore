@@ -2,11 +2,11 @@ import AxiosService from "./AxiosService";
 
 const axiosservice = new AxiosService();
 
-const baseUrl = "https://new-bookstore-backend.herokuapp.com";
+const baseUrl = "https://bookstore.incubation.bridgelabz.com";
 
 let header={
     headers: {
-        Authorization: localStorage.getItem("token")
+        "x-access-token": localStorage.getItem("token")
     }
 }
 
@@ -24,7 +24,7 @@ class UserService {
         return axiosservice.postMethod(`${baseUrl}/bookstore_user/add_cart_item/${data.product_id}`,{},header);
     }
     getCart(data){
-        return axiosservice.getMethod(`${baseUrl}/bookstore_user/get_cart_items`,data,header);
+        return axiosservice.getMethod(`${baseUrl}/bookstore_user/get_cart_items`,header);
     }
     deleteCart(data){
         return axiosservice.deleteMethod(`${baseUrl}/bookstore_user/remove_cart_item`,data,header);

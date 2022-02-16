@@ -17,19 +17,16 @@ export class Books extends Component {
     }
 
     addBooktoCart = (item) => {
-        let result = this.state.booklistArray.find(i => i._id == item)
-        this.state.addedtoBag.push(result)
-        this.props.childToParent(this.state.addedtoBag)
-
         let data ={
             "product_id":item,
             
         }
         service.addCart(data)
             .then(res => {
-                this.setState({
-                    booklistArray: res.data
-                })
+                let result = this.state.booklistArray.find(i => i._id == item)
+                this.state.addedtoBag.push(result)
+                this.props.childToParent(this.state.addedtoBag)
+                console.log(res);
             })
             .catch(err => {
                 console.log(err);

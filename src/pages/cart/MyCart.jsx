@@ -20,12 +20,16 @@ export class MyCart extends Component {
     this.state = {
        getmycartArray :[]
     }
-    this.getmycartlist();
+  }
+
+  componentDidMount(){
+    this.getmycartlist(); 
   }
 
   getmycartlist = () => {
     service.getCart()
         .then(res => {
+          console.log(res);
             this.setState({
               getmycartArray: res.data.result
             })
@@ -33,6 +37,10 @@ export class MyCart extends Component {
         .catch(err => {
             console.log(err);
         })
+}
+
+checkout=()=>{
+  window.open("/homepage", "_self");
 }
 
   render() {
@@ -138,7 +146,7 @@ export class MyCart extends Component {
               </div>
             </div>
             <div className='button'>
-              <button className='order'>CHECKOUT</button>
+              <button className='order' onClick={(event) => this.checkout(event)}>CHECKOUT</button>
             </div>
           </div>
         </div>

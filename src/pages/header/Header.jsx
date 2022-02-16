@@ -2,7 +2,7 @@ import React from 'react'
 import './Header.scss'
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, useTheme } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
@@ -78,9 +78,13 @@ openMyCart=()=>{
                 </div>
 
                 <div className="right-icons">
+                    <div className="user">
+                        <PersonOutlinedIcon style={{ color: 'white' }}/>
+                        <p id="user-name" > Praveen </p>
+                    </div>
                     <div className="cart">
-                        <p id="cart-name" > cart </p>
                         <ShoppingCartOutlinedIcon style={{ color: 'white' }} onClick={this.openMyCart}/>
+                        <p id="cart-name" > cart </p>
                         <p>{this.props.parentToChild}</p>
                     </div>
                 </div>
