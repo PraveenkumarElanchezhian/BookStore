@@ -27,10 +27,10 @@ class UserService {
         return axiosservice.getMethod(`${baseUrl}/bookstore_user/get_cart_items`,header);
     }
     deleteCart(data){
-        return axiosservice.deleteMethod(`${baseUrl}/bookstore_user/remove_cart_item`,data,header);
+        return axiosservice.deleteMethod(`${baseUrl}/bookstore_user/remove_cart_item/${data}`,{},header);
     }
-    updateCart(data){
-        return axiosservice.updateMethod(`${baseUrl}​/bookstore_user​/cart_item_quantity​`,data,header);
+    updateCart(_id,data){
+        return axiosservice.updateMethod(`${baseUrl}​/bookstore_user​/cart_item_quantity/${_id}​`,data,header);
     }
     addWishlist(data){
         return axiosservice.postMethod(`${baseUrl}/bookstore_user/add_wish_list`,data,header);

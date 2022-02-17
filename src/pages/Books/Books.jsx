@@ -85,7 +85,7 @@ export class Books extends Component {
                                                     <button className='button-right'>WISHLIST</button>
                                                 </div>
                                                 :
-                                                <button className='button'>ADDED TO BAG</button>
+                                                <button className='add_button'>ADDED TO BAG</button>
                                         }
                                         </div>
                                     </div>
