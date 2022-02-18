@@ -4,6 +4,21 @@ import homepage1 from '../../Images/homepage1.png';
 import homepage2 from '../../Images/homepage2.png';
 import './Homepage.scss';
 export class Homepage extends Component {
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+        fullname: '',
+        phonenumber: localStorage.getItem('_phonenumber'),
+        pincode: '',
+        locality: '',
+        fullAddress: localStorage.getItem('_fullAddress'),
+        city: '',
+        landmark: ''
+      }
+    }
+    
+
     render() {
         return (
             <div className='header'>
@@ -30,9 +45,9 @@ export class Homepage extends Component {
                            <div className='Address'>Address</div> 
                         </div>
                         <div className='contents2'>
-                            <div className='email_d'>admin@bookstore.com</div> 
-                            <div className='contact_d'>+91 8163475881</div> 
-                            <div className='Address_d'>42/14-salem</div> 
+                            <div className='email_d'>epraveenkumar1997@gmail.com</div> 
+                            <div className='contact_d'>{this.state.phonenumber}</div> 
+                            <div className='Address_d'>{this.state.fullAddress}</div> 
                         </div>
                     </div>
                     <div className='section-3'>

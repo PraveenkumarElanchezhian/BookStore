@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Books.scss';
 import book2 from '../../Images/book2.png';
 import UserService from '../../Service/UserService';
+import { display } from '@mui/system';
 const service = new UserService();
 
 export class Books extends Component {
@@ -10,16 +11,17 @@ export class Books extends Component {
 
         this.state = {
             booklistArray: [],
-            addedtoBag: []
+            addedtoBag: [],
+            addedtoWishlist: []
 
         }
         this.getbooklist();
     }
 
     addBooktoCart = (item) => {
-        let data ={
-            "product_id":item,
-            
+        let data = {
+            "product_id": item,
+
         }
         service.addCart(data)
             .then(res => {
@@ -31,7 +33,25 @@ export class Books extends Component {
             .catch(err => {
                 console.log(err);
             })
+    }
 
+    addBooktoWishlist = (item) =>{
+        let data = {
+            "product_id": item,
+            "_id": "620fdd63464b7d000e7f269e",
+            "user_id": "620cf73dbe78cd000e619347",
+        }
+        service.addWishlist(data)
+            .then(res => {
+                // let result = this.state.booklistArray.find(i => i._id == item)
+                // this.state.addedtoWishlist.push(result)
+                // this.props.childToParent(this.state.addedtoWishlist)
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            window.open("/wishlist", "_self");
     }
 
     getbooklist = () => {
@@ -45,8 +65,15 @@ export class Books extends Component {
                 console.log(err);
             })
     }
-    itemisexists = (data) => {
-        return this.state.addedtoBag.some(item => data._id === item._id)
+    itemisExists = (data) => {
+        let addtocart = this.state.addedtoBag.some(item => data._id === item._id)
+        return addtocart
+
+    }
+
+    itemisWishlist = (data) => {
+        let addtowishlist = this.state.addedtoWishlist.some(item => data._id === item._id)
+        return addtowishlist
     }
 
     changeHandle = (e) => {
@@ -78,15 +105,28 @@ export class Books extends Component {
                                             <span id='new-price'>{item.price}</span>
                                             {/* <span id='old-price'></span> */}
                                         </div>
-                                        <div>{
-                                            this.itemisexists(item) == false ?
-                                                <div className='bottom-button'>
-                                                    <button className='button-left' value={item._id} onClick={(event) => this.addBooktoCart(event.target.value)}>ADD TO BAG</button>
-                                                    <button className='button-right'>WISHLIST</button>
-                                                </div>
-                                                :
-                                                <button className='add_button'>ADDED TO BAG</button>
-                                        }
+                                        <div className='buttonsq'>
+                                            <div style={{width:'50%'}}>
+                                                {this.itemisExists(item) == false ?
+                                                    <div className='bottom-button'>
+                                                        <button className='button-left' value={item._id} onClick={(event) => this.addBooktoCart(event.target.value)}>ADD TO BAG</button>
+                                                        {/* <button className='button-right'>WISHLIST</button> */}
+                                                    </div>
+                                                    :
+                                                    <button className='add_button'>ADDED TO BAG</button>
+                                            }
+                                            </div>
+
+                                            <div style={{width:'50%'}}>
+                                                {this.itemisWishlist(item) == false ?
+                                                    <div className='bottom-button'>
+                                                        {/* <button className='button-left' >ADD TO BAG</button> */}
+                                                        <button className='button-right' value={item._id} onClick={(event) => this.addBooktoWishlist(event.target.value)}>WISHLIST</button>
+                                                    </div>
+                                                    :
+                                                    <button className='add_button'>ADDED TO WISHLIST</button>
+                                            }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

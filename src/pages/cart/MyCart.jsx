@@ -23,7 +23,20 @@ export class MyCart extends Component {
       mycartArray: [],
       quantity: 1,
       show: true,
-      min: 1
+      min: 0,
+      fullName: '',
+      phonenumber: '',
+      pincode: '',
+      locality: '',
+      fullAddress: '',
+      city: '',
+      landmark: '',
+      product_id: '',
+      product_name: '',
+      product_quantity: '',
+      product_price: '',
+      orders: []
+
     }
   }
 
@@ -38,20 +51,20 @@ export class MyCart extends Component {
       }
     });
     let data = {
-      "quantityToBuy": this.state.quantity
+      "quantityToBuy": this.state.quantity + 1
     }
-    this.updateCartItems(item._id,data)
+    this.updateCartItems(item._id, data)
   }
 
-  updateCartItems=(_id,data)=>{
-    service.updateCart(_id,data)
-    .then(res=>{
-      console.log(res);
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-    }
+  updateCartItems = (_id, data) => {
+    service.updateCart(_id, data)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
 
   DecreaseItem = (item) => {
     this.setState(prevState => {
@@ -64,9 +77,9 @@ export class MyCart extends Component {
       }
     });
     let data = {
-      "quantityToBuy": this.state.quantity
+      "quantityToBuy": this.state.quantity - 1
     }
-    this.updateCartItems(item._id,data)
+    this.updateCartItems(item._id, data)
   }
 
   handleChange = (event) => {
@@ -100,7 +113,30 @@ export class MyCart extends Component {
 
 
   checkout = () => {
-    window.open("/homepage", "_self");
+    localStorage.setItem('_phonenumber', this.state.phonenumber)
+    localStorage.setItem('_fullAddress', this.state.fullAddress)
+    let array = [];
+    this.state.mycartArray.map((item) => {
+      let book_Order = {
+        product_id: item.product_id._id,
+        product_name: item.product_id.bookName,
+        product_quantity: item.quantityToBuy,
+        product_price: item.product_id.price,
+      };
+      return array.push(book_Order);
+    });
+    let data = {
+      orders: array,
+    };
+    service.addOrder(data)
+      .then(res => {
+        console.log(res);
+        this.getmycartlist();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    // window.open("/homepage", "_self");
   }
 
   openCustomerDetails = () => {
@@ -127,6 +163,35 @@ export class MyCart extends Component {
       })
   }
 
+  changefield = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  Continue = () => {
+    let data = {
+      "addressType": "Home",
+      // "fullName": this.state.fullName,
+      // "phonenumber": this.state.phonenumber,
+      // "pincode": this.state.pincode,
+      // "locality": this.state.locality,
+      "fullAddress": this.state.fullAddress,
+      "city": this.state.city,
+      "state": this.state.landmark
+    }
+    service.customerDetails(data)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    this.setState({
+      openOrderpage: true
+    })
+
+  }
 
   render() {
     return (
@@ -175,29 +240,29 @@ export class MyCart extends Component {
               <div className='h1'>Customer Details</div>
               <div className='text-fields'>
                 <div className='name-field'>
-                  <TextField size="medium" id="outlined-basic" label="Name" variant="outlined" style={{ width: "250px" }} />
+                  <TextField name='fullName' size="medium" id="outlined-basic" label="Name" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
                 </div>
                 <div className='mobile-num'>
-                  <TextField id="outlined-basic" label="Phone number" variant="outlined" style={{ width: "250px" }} />
+                  <TextField name='phonenumber' id="outlined-basic" label="Phone number" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
                 </div>
               </div>
               <div className='text-fields'>
                 <div className='name-field'>
-                  <TextField size="medium" id="outlined-basic" label="Pincode" variant="outlined" style={{ width: "250px" }} />
+                  <TextField name='pincode' size="medium" id="outlined-basic" label="Pincode" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
                 </div>
                 <div className='mobile-num'>
-                  <TextField id="outlined-basic" label="Locality" variant="outlined" style={{ width: "250px" }} />
+                  <TextField name='locality' id="outlined-basic" label="Locality" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
                 </div>
               </div>
-              <div className='Address'>
-                <TextField id="outlined-basic" label="Address" variant="outlined" style={{ width: "532px" }} multiline="true" rows="4" />
+              <div className='fullAddress'>
+                <TextField name='fullAddress' id="outlined-basic" label="fullAddress" variant="outlined" style={{ width: "532px" }} multiline="true" rows="4" onChange={(e) => this.changefield(e)} />
               </div>
               <div className='text-fields'>
                 <div className='name-field'>
-                  <TextField size="medium" id="outlined-basic" label="city/town" variant="outlined" style={{ width: "250px" }} />
+                  <TextField name='city' size="medium" id="outlined-basic" label="city/town" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
                 </div>
                 <div className='mobile-num'>
-                  <TextField id="outlined-basic" label="Landmark" variant="outlined" style={{ width: "250px" }} />
+                  <TextField name='landmark' id="outlined-basic" label="Landmark" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
                 </div>
               </div>
               <div className='radio'>
@@ -211,7 +276,7 @@ export class MyCart extends Component {
                 </FormControl>
               </div>
               <div className='buttons'>
-                <button className='continue-button' onClick={this.openOrderDetails}>Continue</button>
+                <button className='continue-button' onClick={(event) => this.Continue(event)}  /* onClick={this.openOrderDetails} */ >Continue</button>
               </div>
             </div>
           </div>
@@ -223,19 +288,21 @@ export class MyCart extends Component {
           :
           <div className='order_summary'>
             <div className='mycartt'>Order Summary</div>
-            <div >
-              <div className='content-container'>
-                <img className='image_style' src={book1} alt="image" />
-                <div className='cart-description'>
-                  <div className='bookname'>Don't Make Me Think</div>
-                  <div className='authorname'>by Steve Krug</div>
-                  <div className='bookprice'>Rs. 1500</div>
+            {this.state.mycartArray.map((item, index) => (
+              <div >
+                <div className='content-container'>
+                  <img className='image_style' src={book1} alt="image" />
+                  <div className='cart-description'>
+                    <div className='bookname'>{item.product_id.bookName}</div>
+                    <div className='authorname'>{item.product_id.author}</div>
+                    <div className='bookprice'>Rs. {item.product_id.price}</div>
+                  </div>
+                </div>
+                <div className='buttonss'>
+                  <button className='order' onClick={(event) => this.checkout(event)}>CHECKOUT</button>
                 </div>
               </div>
-              <div className='buttonss'>
-                <button className='order' onClick={(event) => this.checkout(event)}>CHECKOUT</button>
-              </div>
-            </div>
+            ))}
           </div>
         }
       </div>

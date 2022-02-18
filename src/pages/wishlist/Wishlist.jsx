@@ -5,7 +5,48 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import './Wishlist.scss';
 import Footer from '../footer/Footer';
+import UserService from '../../Service/UserService';
+const service = new UserService();
+
 export class Wishlist extends Component {
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+        myWishlistArray: [],
+      }
+    }
+
+    componentDidMount() {
+        this.getmyWishlist();
+      }
+    
+      getmyWishlist = () => {
+        service.getWishlist()
+          .then(res => {
+            console.log(res);
+            this.setState({
+                myWishlistArray: res.data.result
+            })
+            console.log(this.state.myWishlistArray);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      }
+
+      removeWishlistItems = (item) => {
+        console.log(item);
+        service.deleteWishlist(item)
+          .then(res => {
+            console.log(res);
+            this.getmyWishlist();
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      }
+
     render() {
         return (
             <div className=''>
@@ -16,24 +57,26 @@ export class Wishlist extends Component {
                     <button className='button_style'>My Wishlist</button>
                 </div>
                 <div className='my-cart'>
-                    <h3>My Wishlist (02)</h3>
+                    <h3>My Wishlist ({this.state.myWishlistArray.length})</h3>
                     </div>
+                    {this.state.myWishlistArray.map((item, index) => (
                 <div className='wishlist_summary'>
                     <div >
                         <div className='content-container'>
                             <img className='image_style' src={book1} alt="image" />
                             <div className='cart-description'>
-                                <div className='bookname'>Don't Make Me Think</div>
-                                <div className='authorname'>by Steve Krug</div>
-                                <div className='bookprice'>Rs. 1500</div>
+                                <div className='bookname'>{item.product_id.bookName}</div>
+                                <div className='authorname'>{item.product_id.author}</div>
+                                <div className='bookprice'>Rs. {item.product_id.price}</div>
                             </div>
                             <div className='icons'>
-                                <ShoppingCartOutlinedIcon />
+                                <ShoppingCartOutlinedIcon value={item._id} onClick={(event) => this.removeWishlistItems(event.target.value)}/>
                                 <DeleteOutlinedIcon />
                             </div>
                         </div>
                     </div>
                 </div>
+                    ))}
                 <Footer/>
             </div>
         )

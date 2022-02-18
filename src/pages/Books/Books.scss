@@ -88,28 +88,31 @@
                     text-decoration: line-through; 
                 }
             }
-
-            .bottom-button{
+            .buttonsq{
                 display: flex;
                 width: 100%;
-                justify-content: space-between;
-                .button-left{  
-                    width: 45%;  
-                    height: 25px;
-                    background-color: #A03037;
-                    border: 0px;
-                    border-radius: 3px;
-                    color:white;
-                    font-size: x-small;
+                .bottom-button{
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-evenly;
+                    .button-left{  
+                        width: 90%; 
+                        height: 25px;
+                        background-color: #A03037;
+                        border: 0px;
+                        border-radius: 3px;
+                        color:white;
+                        font-size: x-small;
+                    }
+                    .button-right{
+                        width: 90%;
+                        height: 25px;
+                        background-color: white;
+                        border : 2px solid #8b8888;
+                        border-radius: 3px;
+                        font-size: x-small;
+                    } 
                 }
-                .button-right{
-                    width: 45%;
-                    height: 25px;
-                    background-color: white;
-                    border : 2px solid #8b8888;
-                    border-radius: 3px;
-                    font-size: x-small;
-                } 
             }
             .add_button{
                 width: 100%;  
