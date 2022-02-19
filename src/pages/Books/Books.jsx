@@ -36,22 +36,18 @@ export class Books extends Component {
     }
 
     addBooktoWishlist = (item) =>{
+
         let data = {
             "product_id": item,
-            "_id": "620fdd63464b7d000e7f269e",
-            "user_id": "620cf73dbe78cd000e619347",
         }
         service.addWishlist(data)
             .then(res => {
-                // let result = this.state.booklistArray.find(i => i._id == item)
-                // this.state.addedtoWishlist.push(result)
-                // this.props.childToParent(this.state.addedtoWishlist)
                 console.log(res);
+                window.open("/wishlist", "_self");
             })
             .catch(err => {
                 console.log(err);
             })
-            window.open("/wishlist", "_self");
     }
 
     getbooklist = () => {

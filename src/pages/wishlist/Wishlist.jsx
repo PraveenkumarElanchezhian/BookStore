@@ -70,8 +70,8 @@ export class Wishlist extends Component {
                                 <div className='bookprice'>Rs. {item.product_id.price}</div>
                             </div>
                             <div className='icons'>
-                                <ShoppingCartOutlinedIcon value={item._id} onClick={(event) => this.removeWishlistItems(event.target.value)}/>
-                                <DeleteOutlinedIcon />
+                                <ShoppingCartOutlinedIcon />
+                                <DeleteOutlinedIcon  onClick={() => this.removeWishlistItems(item.product_id._id)}/>
                             </div>
                         </div>
                     </div>
