@@ -18,6 +18,9 @@ export class Homepage extends Component {
       }
     }
     
+    continueShopping=()=>{
+        window.open("/login", "_self");
+    }
 
     render() {
         return (
@@ -51,7 +54,7 @@ export class Homepage extends Component {
                         </div>
                     </div>
                     <div className='section-3'>
-                        <button className='buttonq'>CONTINUE SHOPPING</button>
+                        <button className='buttonq' onClick={this.continueShopping}>CONTINUE SHOPPING</button>
                     </div>
                 </div>
             </div>

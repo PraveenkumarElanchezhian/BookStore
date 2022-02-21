@@ -13,8 +13,10 @@ export class Books extends Component {
             booklistArray: [],
             addedtoBag: [],
             addedtoWishlist: []
-
         }
+    }
+
+    componentDidMount(){
         this.getbooklist();
     }
 
@@ -42,8 +44,10 @@ export class Books extends Component {
         }
         service.addWishlist(data)
             .then(res => {
+                let result = this.state.booklistArray.find(i => i._id == item)
+                this.state.addedtoWishlist.push(result)
+                this.props.wishlistCount(this.state.addedtoWishlist)
                 console.log(res);
-                window.open("/wishlist", "_self");
             })
             .catch(err => {
                 console.log(err);
@@ -120,7 +124,7 @@ export class Books extends Component {
                                                         <button className='button-right' value={item._id} onClick={(event) => this.addBooktoWishlist(event.target.value)}>WISHLIST</button>
                                                     </div>
                                                     :
-                                                    <button className='add_button'>ADDED TO WISHLIST</button>
+                                                    <button className='add_button'>WISHLIST</button>
                                             }
                                             </div>
                                         </div>
