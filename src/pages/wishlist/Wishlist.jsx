@@ -50,7 +50,7 @@ export class Wishlist extends Component {
     render() {
         return (
             <div className=''>
-                <Header />
+                <Header wishlistCount={this.state.myWishlistArray.length}/>
                 <div className='button'>
                     <button className='button_style'>Home</button>
                     <h6>/</h6>

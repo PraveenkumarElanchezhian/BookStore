@@ -12,8 +12,10 @@ export class Books extends Component {
         this.state = {
             booklistArray: [],
             addedtoBag: [],
-            addedtoWishlist: []
+            addedtoWishlist: [],
+            tempbooklistArray:[]
         }
+        console.log(this.props.parentToChild );
     }
 
     componentDidMount(){
@@ -58,8 +60,10 @@ export class Books extends Component {
         service.getBook()
             .then(res => {
                 this.setState({
-                    booklistArray: res.data.result
+                    booklistArray: res.data.result,
+                    tempbooklistArray: res.data.result
                 })
+                // console.log(this.state.booklistArray);
             })
             .catch(err => {
                 console.log(err);
@@ -81,6 +85,15 @@ export class Books extends Component {
             [e.target.name]: e.target.value,
         });
     };
+
+    getAlert=(item) =>{
+        let val = item.toLowerCase();
+        this.state.booklistArray = this.state.tempbooklistArray
+        console.log( this.state.booklistArray);
+        let matches = this.state.booklistArray.filter(v => v.bookName.toLowerCase().includes(val));
+        this.state.booklistArray=matches
+        console.log( this.state.booklistArray);
+      }
 
     render() {
         return (

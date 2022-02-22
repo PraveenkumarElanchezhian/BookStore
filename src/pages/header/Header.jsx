@@ -1,17 +1,17 @@
 import React from 'react'
 import './Header.scss'
+import Badge from '@material-ui/core/Badge';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import  { Component } from 'react'
+import { Redirect } from "react-router-dom";
 
 //badge icons
-import Badge from '@material-ui/core/Badge';
-import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
 const StyledBadge = withStyles((theme) => ({
     badge: {
       right: -3,
@@ -26,17 +26,32 @@ const StyledBadge = withStyles((theme) => ({
 export class Header extends Component {
   constructor(props) {
     super(props) 
+    this.handleLoginKeyUp = this.keyUpHandler.bind(this, 'searchitems');
+    this.state = {
+        redirect:null,
+    }
 }
 
 openMyCart=()=>{
-   window.open("/myCart", "_self");
+    this.setState ({
+        redirect: "/myCart"
+    })
 }
 
 openMyWishlist=()=>{
-    window.open("/wishlist", "_self");
+    this.setState ({
+        redirect: "/wishlist"
+    })
  }
 
+ keyUpHandler(refName, e) {
+    this.props.searchbookItems(e.target.value)
+}
+
   render() {
+    if (this.state.redirect) {
+        return <Redirect to={this.state.redirect} />
+      }
     return (
       <div className="head-container">
             <div className="headbar">
@@ -46,7 +61,7 @@ openMyWishlist=()=>{
                 </div> 
 
                 <div className="search-bar">
-                    <input type='search' className='search' placeholder='Search...'></input>
+                    <input type='search' className='search' placeholder='Search...' onKeyUp={this.handleLoginKeyUp} ref="searchitems"></input>
                 </div>
 
                 <div className="right-icons">
@@ -60,9 +75,6 @@ openMyWishlist=()=>{
                         <ShoppingCartIcon style={{ color: 'white' }} onClick={this.openMyCart}/>
                         </StyledBadge>
                     </IconButton>
-                        {/* <ShoppingCartOutlinedIcon style={{ color: 'white' }} onClick={this.openMyCart} />
-                        <p id="cart-name" > cart </p>
-                        <p>{this.props.parentToChild}</p> */}
                     </div>
 
                    
@@ -72,8 +84,6 @@ openMyWishlist=()=>{
                         <FavoriteBorderOutlinedIcon style={{ color: 'white' }} onClick={this.openMyWishlist}/>
                         </StyledBadge>
                     </IconButton>
-                        {/* <FavoriteBorderOutlinedIcon style={{ color: 'white' }}/>
-                        <p id="wishlist-name" > Wishlist </p> */}
                     </div>
                 </div>
 

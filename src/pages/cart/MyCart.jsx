@@ -136,7 +136,6 @@ export class MyCart extends Component {
       .catch(err => {
         console.log(err);
       })
-    // window.open("/homepage", "_self");
   }
 
   openCustomerDetails = () => {
@@ -197,7 +196,7 @@ export class MyCart extends Component {
     return (
 
       <div className='carts-container'>
-        <Header />
+        <Header parentToChild={this.state.mycartArray.length}/>
         <h3 className='heading'></h3>
         <div className='carts'>
           <h3 className='mycart'>My Cart({this.state.mycartArray.length})</h3>
