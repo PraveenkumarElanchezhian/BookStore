@@ -8,6 +8,7 @@ import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import  { Component } from 'react'
 import { Redirect } from "react-router-dom";
 
@@ -84,6 +85,10 @@ openMyWishlist=()=>{
                         <FavoriteBorderOutlinedIcon style={{ color: 'white' }} onClick={this.openMyWishlist}/>
                         </StyledBadge>
                     </IconButton>
+                    </div>
+
+                    <div className='exitIcon'>
+                    <ExitToAppIcon style={{ color: 'white', }}/>
                     </div>
                 </div>
 
