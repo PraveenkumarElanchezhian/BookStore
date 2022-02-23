@@ -13,12 +13,11 @@ export class Books extends Component {
             booklistArray: [],
             addedtoBag: [],
             addedtoWishlist: [],
-            tempbooklistArray:[]
+            tempbooklistArray: [],
         }
-        console.log(this.props.parentToChild );
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getbooklist();
     }
 
@@ -39,7 +38,7 @@ export class Books extends Component {
             })
     }
 
-    addBooktoWishlist = (item) =>{
+    addBooktoWishlist = (item) => {
 
         let data = {
             "product_id": item,
@@ -63,7 +62,6 @@ export class Books extends Component {
                     booklistArray: res.data.result,
                     tempbooklistArray: res.data.result
                 })
-                // console.log(this.state.booklistArray);
             })
             .catch(err => {
                 console.log(err);
@@ -86,15 +84,28 @@ export class Books extends Component {
         });
     };
 
-    getAlert=(item) =>{
+    getAlert = (item) => {
         let val = item.toLowerCase();
         this.state.booklistArray = this.state.tempbooklistArray
-        console.log( this.state.booklistArray);
         let matches = this.state.booklistArray.filter(v => v.bookName.toLowerCase().includes(val));
-        this.state.booklistArray=matches
-        console.log( this.state.booklistArray);
-      }
+        this.state.booklistArray = matches
+    }
 
+    getsort = (item) => {
+        let sortedProductsAsc;
+        this.state.booklistArray = this.state.tempbooklistArray
+        if (item == "asc") {
+            sortedProductsAsc = this.state.booklistArray.sort((a, b) => {
+                return parseInt(a.price) - parseInt(b.price);
+            })
+        }
+        else {
+            sortedProductsAsc = this.state.booklistArray.sort((a, b) => {
+                return parseInt(b.price) - parseInt(a.price);
+            })
+      }
+      this.state.booklistArray = sortedProductsAsc
+    }
     render() {
         return (
             <div className='body'>
@@ -119,7 +130,7 @@ export class Books extends Component {
                                             {/* <span id='old-price'></span> */}
                                         </div>
                                         <div className='buttonsq'>
-                                            <div style={{width:'50%'}}>
+                                            <div style={{ width: '50%' }}>
                                                 {this.itemisExists(item) == false ?
                                                     <div className='bottom-button'>
                                                         <button className='button-left' value={item._id} onClick={(event) => this.addBooktoCart(event.target.value)}>ADD TO BAG</button>
@@ -127,10 +138,10 @@ export class Books extends Component {
                                                     </div>
                                                     :
                                                     <button className='add_button'>ADDED TO BAG</button>
-                                            }
+                                                }
                                             </div>
 
-                                            <div style={{width:'50%'}}>
+                                            <div style={{ width: '50%' }}>
                                                 {this.itemisWishlist(item) == false ?
                                                     <div className='bottom-button'>
                                                         {/* <button className='button-left' >ADD TO BAG</button> */}
@@ -138,7 +149,7 @@ export class Books extends Component {
                                                     </div>
                                                     :
                                                     <button className='add_button'>WISHLIST</button>
-                                            }
+                                                }
                                             </div>
                                         </div>
                                     </div>

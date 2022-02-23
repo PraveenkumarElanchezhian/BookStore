@@ -26,7 +26,7 @@ const StyledBadge = withStyles((theme) => ({
 export class Header extends Component {
   constructor(props) {
     super(props) 
-    this.handleLoginKeyUp = this.keyUpHandler.bind(this, 'searchitems');
+    this.searchItemsHandle = this.searchHandler.bind(this, 'searchitems');
     this.state = {
         redirect:null,
     }
@@ -44,7 +44,7 @@ openMyWishlist=()=>{
     })
  }
 
- keyUpHandler(refName, e) {
+ searchHandler(refName, e) {
     this.props.searchbookItems(e.target.value)
 }
 
@@ -61,7 +61,7 @@ openMyWishlist=()=>{
                 </div> 
 
                 <div className="search-bar">
-                    <input type='search' className='search' placeholder='Search...' onKeyUp={this.handleLoginKeyUp} ref="searchitems"></input>
+                    <input type='search' className='search' placeholder='Search...' onKeyUp={this.searchItemsHandle} ref="searchitems"></input>
                 </div>
 
                 <div className="right-icons">

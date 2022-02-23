@@ -8,11 +8,12 @@ export class Dashboard extends Component {
 constructor(props) {
   super(props)
   this.child = React.createRef();
+  this.sorting = React.createRef();
   this.state = {
      cartCount:0,
      wishlistCount:0,
-     searchItems:''
-     
+     searchItems:'',
+     sortAscDesc:"desc",
   }
 }
     searchItems = (item) => {
@@ -34,6 +35,18 @@ constructor(props) {
     })
   }
 
+  change=(item)=>{
+    this.setState({value: item.target.value});
+    if(item.target.value=="asc"){
+        this.child.current.getsort(item.target.value);
+        console.log("low");
+    }
+    else if(item.target.value=="desc"){
+        this.child.current.getsort(item.target.value);
+        console.log("high");
+    }
+}
+
     render() {
         return (
             <div className="dash-container">
@@ -45,9 +58,10 @@ constructor(props) {
                         <span className='quantity'>(22 items)</span>
                     </div>
                     <div>
-                        <select name="sort by relevance" id="dropdown">
-                            <option value="lowPrice">Price:Low to high</option>
-                            <option value="highPrice">Price:High to low</option>
+                        <select name="sort by relevance" id="dropdown" onChange={this.change} value={this.state.value} parentToChild={this.state.value}>
+                        <option value="sortItems">Sort by relevance</option>
+                            <option value="asc" >Price:Low to high</option>  
+                            <option value="desc" >Price:High to low</option>  
                             <option value="newPrice">Newest arrivals</option>
                         </select>
                     </div>
