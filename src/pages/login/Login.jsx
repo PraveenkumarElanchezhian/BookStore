@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import { Component } from 'react';
 import logo from '../../Images/logo.png';
+import { Redirect } from "react-router-dom";
 import UserService from '../../Service/UserService';
 const service = new UserService();
 
@@ -24,7 +25,8 @@ export class Login extends Component {
       fullNameError: false,
       phoneError: false,
       emailError: false,
-      passwordError: false
+      passwordError: false,
+      redirect: null
     }
   }
 
@@ -87,8 +89,10 @@ export class Login extends Component {
 
       service.login(data)
         .then(res => {
-          localStorage.setItem('token',res.data.result.accessToken)
-          window.open("/dashboard", "_self");
+          localStorage.setItem('token', res.data.result.accessToken)
+          this.setState({
+            redirect: "/dashboard"
+          })
         })
         .catch(err => {
           console.log(err);
@@ -110,7 +114,9 @@ export class Login extends Component {
       service.Signup(data)
         .then(res => {
           console.log(res);
-          window.open("/login", "_self");
+          this.setState({
+            redirect: "/login"
+          })
         })
         .catch(err => {
           console.log(err);
@@ -119,6 +125,9 @@ export class Login extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
     return (
       <div className="login-container">
         <div className="Image-container">
@@ -141,8 +150,8 @@ export class Login extends Component {
               </div>
 
               <div className="section-2">
-                <TextField name="loginemail" className="email-box"  type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="loginpassword" className="pass-box"  style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="loginemail" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
+                <TextField name="loginpassword" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
               </div>
 
               <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.login(event)}> Login </button>

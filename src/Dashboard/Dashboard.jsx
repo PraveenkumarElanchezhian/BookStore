@@ -3,17 +3,18 @@ import './Dashboard.scss';
 import { Component } from 'react';
 import Header from '../pages/header/Header';
 import Books from '../pages/Books/Books';
-import Pagination from '../pages/pagination/Pagination';
 import Footer from '../pages/footer/Footer';
 export class Dashboard extends Component {
     constructor(props) {
         super(props)
         this.child = React.createRef();
         this.sorting = React.createRef();
+
         this.state = {
             cartCount: 0,
             wishlistCount: 0,
-            searchItems: ''
+            searchItems: '',
+            booklength:0
         }
     }
     searchItems = (item) => {
@@ -35,6 +36,13 @@ export class Dashboard extends Component {
         })
     }
 
+    booksCount=(item)=>{
+        console.log(item);
+        this.setState({
+            booklength: item
+        })
+    }
+
     change = (item) => {
         this.setState({ value: item.target.value });
         if (item.target.value == "asc") {
@@ -48,12 +56,12 @@ export class Dashboard extends Component {
     render() {
         return (
             <div className="dash-container">
-                <Header searchbookItems={this.searchItems} parentToChild={this.state.cartCount} wishlistCount={this.state.wishlistCount} />
+                <Header searchbookItems={this.searchItems} cartlistCount={this.state.cartCount} wishlistCount={this.state.wishlistCount} />
 
                 <div className='second-header'>
                     <div className='left-title'>
                         <span className="book">Books</span>
-                        <span className='quantity'>(22 items)</span>
+                        <span className='quantity'>({this.state.booklength})</span>
                     </div>
                     <div>
                         <select name="sort by relevance" id="dropdown" onChange={this.change} value={this.state.value} parentToChild={this.state.value}>
@@ -66,11 +74,8 @@ export class Dashboard extends Component {
                 </div>
                 <div className='bookList'>
                     <div>
-                        <Books ref={this.child} childToParent={this.childToParent} wishlistCount={this.wishlistCounts} parentToChild={this.state.searchItems} />
+                        <Books ref={this.child} childToParent={this.childToParent} wishlistCount={this.wishlistCounts} parentToChild={this.state.searchItems} booksCount={this.booksCount}/>
                     </div>
-                </div>
-                <div className='pagination'>
-                    <Pagination/>
                 </div>
                 <Footer/>
             </div >

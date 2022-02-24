@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import './MyCart.scss';
+import { Redirect } from "react-router-dom";
 import Header from '../header/Header';
 import book1 from '../../Images/book1.png';
 import UserService from '../../Service/UserService';
@@ -35,8 +36,8 @@ export class MyCart extends Component {
       product_name: '',
       product_quantity: '',
       product_price: '',
-      orders: []
-
+      orders: [],
+      redirect:null
     }
   }
 
@@ -132,6 +133,9 @@ export class MyCart extends Component {
       .then(res => {
         console.log(res);
         this.getmycartlist();
+        this.setState ({
+          redirect: "/homepage"
+      })
       })
       .catch(err => {
         console.log(err);
@@ -193,8 +197,10 @@ export class MyCart extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
     return (
-
       <div className='carts-container'>
         <Header parentToChild={this.state.mycartArray.length}/>
         <h3 className='heading'></h3>

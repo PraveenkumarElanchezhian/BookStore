@@ -131,3 +131,29 @@
 }
 }
 
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5%;
+    .pagination-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .page-numbers{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 15%;
+        }
+    }
+}
+
+#page-numbers > li {
+    margin-right: 0.3em;
+    color: blue;
+    user-select: none;
+    cursor: pointer;
+  }

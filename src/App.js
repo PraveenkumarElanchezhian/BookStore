@@ -6,6 +6,7 @@ import Dashboard from './Dashboard/Dashboard';
 import MyCart from './pages/cart/MyCart';
 import Homepage from './pages/homePage/Homepage';
 import Wishlist from './pages/wishlist/Wishlist';
+import Books from './pages/Books/Books';
 
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ function App() {
        <Switch>
          <Route path="/login" component={Login} />
          <Route path="/signup" component={Signup} />
+         <Route path="/books" component={Books} />
          <Route path="/dashboard" component={Dashboard} />
          <Route path="/myCart" component={MyCart} />
          <Route path="/homepage" component={Homepage} />

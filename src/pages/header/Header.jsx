@@ -45,7 +45,19 @@ openMyWishlist=()=>{
     })
  }
 
- searchHandler(refName, e) {
+logout=()=>{
+    this.setState ({
+        redirect: "/login"
+    })
+} 
+
+bookstore=()=>{
+    this.setState ({
+        redirect:"/dashboard"
+    })
+}
+
+searchHandler(refName, e) {
     this.props.searchbookItems(e.target.value)
 }
 
@@ -57,7 +69,7 @@ openMyWishlist=()=>{
       <div className="head-container">
             <div className="headbar">
                 <div className="book-title">
-                    <MenuBookOutlinedIcon style={{ color: 'white' }} />
+                    <MenuBookOutlinedIcon style={{ color: 'white' }} onClick={this.bookstore}/>
                     <p className='cont1'> Bookstore</p>
                 </div> 
 
@@ -72,7 +84,7 @@ openMyWishlist=()=>{
                     </div>
                     <div className="cart">
                     <IconButton aria-label="cart">
-                        <StyledBadge badgeContent={this.props.parentToChild} color="secondary">
+                        <StyledBadge badgeContent={this.props.cartlistCount} color="secondary">
                         <ShoppingCartIcon style={{ color: 'white' }} onClick={this.openMyCart}/>
                         </StyledBadge>
                     </IconButton>
@@ -88,7 +100,7 @@ openMyWishlist=()=>{
                     </div>
 
                     <div className='exitIcon'>
-                    <ExitToAppIcon style={{ color: 'white', }}/>
+                    <ExitToAppIcon style={{ color: 'white', }} onClick={this.logout}/>
                     </div>
                 </div>
 
