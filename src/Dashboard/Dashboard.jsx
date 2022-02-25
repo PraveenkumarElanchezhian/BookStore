@@ -14,7 +14,7 @@ export class Dashboard extends Component {
             cartCount: 0,
             wishlistCount: 0,
             searchItems: '',
-            booklength:0
+            booklength: 0
         }
     }
     searchItems = (item) => {
@@ -36,8 +36,7 @@ export class Dashboard extends Component {
         })
     }
 
-    booksCount=(item)=>{
-        console.log(item);
+    booksCount = (item) => {
         this.setState({
             booklength: item
         })
@@ -45,39 +44,35 @@ export class Dashboard extends Component {
 
     change = (item) => {
         this.setState({ value: item.target.value });
-        if (item.target.value == "asc") {
-            this.child.current.getsort(item.target.value);
-        }
-        else if (item.target.value == "desc") {
-            this.child.current.getsort(item.target.value);
-        }
+        this.child.current.getsort(item.target.value);
     }
 
     render() {
         return (
             <div className="dash-container">
                 <Header searchbookItems={this.searchItems} cartlistCount={this.state.cartCount} wishlistCount={this.state.wishlistCount} />
-
-                <div className='second-header'>
-                    <div className='left-title'>
-                        <span className="book">Books</span>
-                        <span className='quantity'>({this.state.booklength})</span>
+                <div className='dashboard'>
+                    <div className='second-header'>
+                        <div className='left-title'>
+                            <span className="book">Books</span>
+                            <span className='quantity'>({this.state.booklength})</span>
+                        </div>
+                        <div>
+                            <select name="sort by relevance" id="dropdown" onChange={this.change}>
+                                <option value="sortItems">Sort by relevance</option>
+                                <option value="asc" >Price:Low to high</option>
+                                <option value="desc" >Price:High to low</option>
+                                <option value="newPrice">Newest arrivals</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <select name="sort by relevance" id="dropdown" onChange={this.change} value={this.state.value} parentToChild={this.state.value}>
-                            <option value="sortItems">Sort by relevance</option>
-                            <option value="asc" >Price:Low to high</option>
-                            <option value="desc" >Price:High to low</option>
-                            <option value="newPrice">Newest arrivals</option>
-                        </select>
+                    <div className='bookList'>
+                        <div>
+                            <Books ref={this.child} childToParent={this.childToParent} wishlistCount={this.wishlistCounts} parentToChild={this.state.searchItems} booksCount={this.booksCount} />
+                        </div>
                     </div>
                 </div>
-                <div className='bookList'>
-                    <div>
-                        <Books ref={this.child} childToParent={this.childToParent} wishlistCount={this.wishlistCounts} parentToChild={this.state.searchItems} booksCount={this.booksCount}/>
-                    </div>
-                </div>
-                <Footer/>
+                <Footer />
             </div >
         )
     }

@@ -11,6 +11,7 @@ import './MyCart.scss';
 import { Redirect } from "react-router-dom";
 import Header from '../header/Header';
 import book1 from '../../Images/book1.png';
+import Footer from '../footer/Footer';
 import UserService from '../../Service/UserService';
 const service = new UserService();
 
@@ -37,8 +38,34 @@ export class MyCart extends Component {
       product_quantity: '',
       product_price: '',
       orders: [],
-      redirect:null
+      redirect: null,
+      custNameError: '',
+      custPhnoError: '',
+      custPincodeError: '',
+      custLocalityError: '',
+      custAddressError: '',
+      custCityError: '',
+      custLandmarkError: ''
     }
+  }
+  
+  custValidation = () => {
+    let isError = false;
+    const error = this.state;
+    error.custNameError = this.state.fullName === '' ? true : false;
+    error.custPhnoError = this.state.phonenumber === '' ? true : false;
+    error.custPincodeError = this.state.pincode === '' ? true : false;
+    error.custLocalityError = this.state.locality === '' ? true : false;
+    error.custAddressError = this.state.fullAddress === '' ? true : false;
+    error.custCityError = this.state.city === '' ? true : false;
+    error.custLandmarkError = this.state.landmark === '' ? true : false;
+
+    this.setState({
+      ...error
+    })
+
+    return isError = error.custNameError || error.custPhnoError || error.custPincodeError || error.custLocalityError || error.custAddressError || error.custCityError || error.custLandmarkError;
+
   }
 
   IncrementItem = (item) => {
@@ -105,13 +132,11 @@ export class MyCart extends Component {
         this.setState({
           mycartArray: res.data.result
         })
-        console.log(this.state.mycartArray);
       })
       .catch(err => {
         console.log(err);
       })
   }
-
 
   checkout = () => {
     localStorage.setItem('_phonenumber', this.state.phonenumber)
@@ -133,9 +158,9 @@ export class MyCart extends Component {
       .then(res => {
         console.log(res);
         this.getmycartlist();
-        this.setState ({
+        this.setState({
           redirect: "/homepage"
-      })
+        })
       })
       .catch(err => {
         console.log(err);
@@ -155,7 +180,6 @@ export class MyCart extends Component {
   }
 
   removeCartItems = (item) => {
-    console.log(item);
     service.deleteCart(item)
       .then(res => {
         console.log(res);
@@ -173,27 +197,29 @@ export class MyCart extends Component {
   }
 
   Continue = () => {
-    let data = {
-      "addressType": "Home",
-      // "fullName": this.state.fullName,
-      // "phonenumber": this.state.phonenumber,
-      // "pincode": this.state.pincode,
-      // "locality": this.state.locality,
-      "fullAddress": this.state.fullAddress,
-      "city": this.state.city,
-      "state": this.state.landmark
+    var validated = this.custValidation();
+    if (!validated) {
+      let data = {
+        "addressType": "Home",
+        // "fullName": this.state.fullName,
+        // "phonenumber": this.state.phonenumber,
+        // "pincode": this.state.pincode,
+        // "locality": this.state.locality,
+        "fullAddress": this.state.fullAddress,
+        "city": this.state.city,
+        "state": this.state.landmark
+      }
+      service.customerDetails(data)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      this.setState({
+        openOrderpage: true
+      })
     }
-    service.customerDetails(data)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    this.setState({
-      openOrderpage: true
-    })
-
   }
 
   render() {
@@ -202,99 +228,13 @@ export class MyCart extends Component {
     }
     return (
       <div className='carts-container'>
-        <Header parentToChild={this.state.mycartArray.length}/>
+        <Header cartlistCount={this.state.mycartArray.length} />
         <h3 className='heading'></h3>
-        <div className='carts'>
-          <h3 className='mycart'>My Cart({this.state.mycartArray.length})</h3>
-          {this.state.mycartArray.map((item, index) => (
-            <div>
-              <div className='content-container'>
-                <img className='image_style' src={book1} alt="image" />
-                <div className='cart-description'>
-                  <div className='bookname'>{item.product_id.bookName}</div>
-                  <div className='authorname'>{item.product_id.author}</div>
-                  <div className='bookprice'>Rs. {item.product_id.price}</div>
-                </div>
-              </div>
-              <div className='update-cart'>
-                <div className='empty'></div>
-                <div className='cart_right'>
-                  <div className='left'>
-                    <RemoveCircleOutlineOutlinedIcon htmlColor="lightgray" onClick={() => this.DecreaseItem(item)} />
-                    <div className='cart-quantity'>{this.state.quantity}</div>
-                    <AddCircleOutlineOutlinedIcon htmlColor="lightgray" onClick={() => this.IncrementItem(item)} />
-                  </div>
-                  <div className='right'>
-                    <button className='remove' value={item._id} onClick={(event) => this.removeCartItems(event.target.value)}>Remove</button>
-                  </div>
-                </div>
-              </div>
-              <div className='buttonn'>
-                <button className='order' onClick={this.openCustomerDetails}>PLACE ORDER</button>
-              </div>
-            </div>
-          ))}
-        </div>
-        {this.state.opencustomerpage == false ?
-          <div className='customer-details'  >
-            <div className='inside-details'>Customer Details</div>
-          </div>
-          :
-          <div className='customers-detail'>
-            <div className='inside-customerdetails'>
-              <div className='h1'>Customer Details</div>
-              <div className='text-fields'>
-                <div className='name-field'>
-                  <TextField name='fullName' size="medium" id="outlined-basic" label="Name" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
-                </div>
-                <div className='mobile-num'>
-                  <TextField name='phonenumber' id="outlined-basic" label="Phone number" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
-                </div>
-              </div>
-              <div className='text-fields'>
-                <div className='name-field'>
-                  <TextField name='pincode' size="medium" id="outlined-basic" label="Pincode" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
-                </div>
-                <div className='mobile-num'>
-                  <TextField name='locality' id="outlined-basic" label="Locality" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
-                </div>
-              </div>
-              <div className='fullAddress'>
-                <TextField name='fullAddress' id="outlined-basic" label="fullAddress" variant="outlined" style={{ width: "532px" }} multiline="true" rows="4" onChange={(e) => this.changefield(e)} />
-              </div>
-              <div className='text-fields'>
-                <div className='name-field'>
-                  <TextField name='city' size="medium" id="outlined-basic" label="city/town" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
-                </div>
-                <div className='mobile-num'>
-                  <TextField name='landmark' id="outlined-basic" label="Landmark" variant="outlined" style={{ width: "250px" }} onChange={(e) => this.changefield(e)} />
-                </div>
-              </div>
-              <div className='radio'>
-                <FormControl>
-                  <FormLabel className='type'>Type</FormLabel>
-                  <RadioGroup className='radiogroup'>
-                    <FormControlLabel value="Home" control={<Radio />} label="Home" />
-                    <FormControlLabel value="Work" control={<Radio />} label="Work" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-              <div className='buttons'>
-                <button className='continue-button' onClick={(event) => this.Continue(event)}  /* onClick={this.openOrderDetails} */ >Continue</button>
-              </div>
-            </div>
-          </div>
-        }
-        {this.state.openOrderpage == false ?
-          <div className='customer-details'>
-            <div className='inside-details'>Order Summary</div>
-          </div>
-          :
-          <div className='order_summary'>
-            <div className='mycartt'>Order Summary</div>
+        <div className='mycart-container'>
+          <div className='carts'>
+            <h3 className='mycart'>My Cart({this.state.mycartArray.length})</h3>
             {this.state.mycartArray.map((item, index) => (
-              <div >
+              <div>
                 <div className='content-container'>
                   <img className='image_style' src={book1} alt="image" />
                   <div className='cart-description'>
@@ -303,13 +243,102 @@ export class MyCart extends Component {
                     <div className='bookprice'>Rs. {item.product_id.price}</div>
                   </div>
                 </div>
-                <div className='buttonss'>
-                  <button className='order' onClick={(event) => this.checkout(event)}>CHECKOUT</button>
+                <div className='update-cart'>
+                  <div className='empty'></div>
+                  <div className='cart_right'>
+                    <div className='left'>
+                      <RemoveCircleOutlineOutlinedIcon htmlColor="lightgray" onClick={() => this.DecreaseItem(item)} />
+                      <div className='cart-quantity'>{this.state.quantity}</div>
+                      <AddCircleOutlineOutlinedIcon htmlColor="lightgray" onClick={() => this.IncrementItem(item)} />
+                    </div>
+                    <div className='right'>
+                      <button className='remove' value={item._id} onClick={(event) => this.removeCartItems(event.target.value)}>Remove</button>
+                    </div>
+                  </div>
+                </div>
+                <div className='buttonn'>
+                  <button className='order' onClick={this.openCustomerDetails}>PLACE ORDER</button>
                 </div>
               </div>
             ))}
           </div>
-        }
+          {this.state.opencustomerpage == false ?
+            <div className='customer-details'  >
+              <div className='inside-details'>Customer Details</div>
+            </div>
+            :
+            <div className='customers-detail'>
+              <div className='inside-customerdetails'>
+                <div className='h1'>Customer Details</div>
+                <div className='text-fields'>
+                  <div className='name-field'>
+                    <TextField name='fullName' size="medium" id="outlined-basic" label="Name" variant="outlined" style={{ width: "250px" }} error={this.state.custNameError} helperText={this.state.custNameError ? "Enter a name" : " "} onChange={(e) => this.changefield(e)} />
+                  </div>
+                  <div className='mobile-num'>
+                    <TextField name='phonenumber' id="outlined-basic" label="Phone number" variant="outlined" style={{ width: "250px" }} error={this.state.custPhnoError} helperText={this.state.custPhnoError ? "Enter a phoneno" : " "} onChange={(e) => this.changefield(e)} />
+                  </div>
+                </div>
+                <div className='text-fields'>
+                  <div className='name-field'>
+                    <TextField name='pincode' size="medium" id="outlined-basic" label="Pincode" variant="outlined" style={{ width: "250px" }} error={this.state.custPincodeError} helperText={this.state.custPincodeError ? "Enter a pincode" : " "} onChange={(e) => this.changefield(e)} />
+                  </div>
+                  <div className='mobile-num'>
+                    <TextField name='locality' id="outlined-basic" label="Locality" variant="outlined" style={{ width: "250px" }} error={this.state.custLocalityError} helperText={this.state.custLocalityError ? "Enter a locality" : " "} onChange={(e) => this.changefield(e)} />
+                  </div>
+                </div>
+                <div className='fullAddress'>
+                  <TextField name='fullAddress' id="outlined-basic" label="fullAddress" variant="outlined" style={{ width: "532px" }} multiline="true" rows="4" error={this.state.custAddressError} helperText={this.state.custAddressError ? "Enter a fulladdress" : " "} onChange={(e) => this.changefield(e)} />
+                </div>
+                <div className='text-fields'>
+                  <div className='name-field'>
+                    <TextField name='city' size="medium" id="outlined-basic" label="city/town" variant="outlined" style={{ width: "250px" }} error={this.state.custCityError} helperText={this.state.custCityError ? "Enter a city" : " "} onChange={(e) => this.changefield(e)} />
+                  </div>
+                  <div className='mobile-num'>
+                    <TextField name='landmark' id="outlined-basic" label="Landmark" variant="outlined" style={{ width: "250px" }} error={this.state.custLandmarkError} helperText={this.state.custLandmarkError ? "Enter a landmark" : " "} onChange={(e) => this.changefield(e)} />
+                  </div>
+                </div>
+                <div className='radio'>
+                  <FormControl>
+                    <FormLabel className='type'>Type</FormLabel>
+                    <RadioGroup className='radiogroup'>
+                      <FormControlLabel value="Home" control={<Radio />} label="Home" />
+                      <FormControlLabel value="Work" control={<Radio />} label="Work" />
+                      <FormControlLabel value="other" control={<Radio />} label="Other" />
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+                <div className='buttons'>
+                  <button className='continue-button' onClick={(event) => this.Continue(event)}  /* onClick={this.openOrderDetails} */ >Continue</button>
+                </div>
+              </div>
+            </div>
+          }
+          {this.state.openOrderpage == false ?
+            <div className='customer-details'>
+              <div className='inside-details'>Order Summary</div>
+            </div>
+            :
+            <div className='order_summary'>
+              <div className='mycartt'>Order Summary</div>
+              {this.state.mycartArray.map((item, index) => (
+                <div >
+                  <div className='content-container'>
+                    <img className='image_style' src={book1} alt="image" />
+                    <div className='cart-description'>
+                      <div className='bookname'>{item.product_id.bookName}</div>
+                      <div className='authorname'>{item.product_id.author}</div>
+                      <div className='bookprice'>Rs. {item.product_id.price}</div>
+                    </div>
+                  </div>
+                  <div className='buttonss'>
+                    <button className='order' onClick={(event) => this.checkout(event)}>CHECKOUT</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          }
+        </div>
+        <Footer />
       </div>
     )
   }

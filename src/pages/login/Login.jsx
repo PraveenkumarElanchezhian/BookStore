@@ -29,6 +29,18 @@ export class Login extends Component {
       redirect: null
     }
   }
+  
+  handleOpen = () => {
+    this.setState({
+      openPage: true,
+    })
+  }
+
+  handleClose = () => {
+    this.setState({
+      openPage: false,
+    })
+  }
 
   changeHandle = (e) => {
     this.setState({
@@ -63,19 +75,6 @@ export class Login extends Component {
 
     return isError = error.fullNameError || error.phoneError || error.emailError || error.passwordError;
 
-  }
-
-
-  handleOpen = () => {
-    this.setState({
-      openPage: true,
-    })
-  }
-
-  handleClose = () => {
-    this.setState({
-      openPage: false,
-    })
   }
 
   login = () => {

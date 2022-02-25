@@ -5,127 +5,127 @@
     align-items: center;
     justify-content: center;
     
-    .grid-container{
-    display: grid;
-    // grid-template-columns: repeat(5,1fr);
-    // margin: 0vh 6vw;
-    .main-card{
-        margin: 15px;
-        width: 200px;
-        height: 220px;
-        box-shadow: -1px -1px 4px gray;
-        border: lightgray;
-        border-radius: 4px;
-// .card{
-    // margin: 15px;
-    // width: 200px;
-    // height: 220px;
-    // box-shadow: -1px -1px 4px gray;
-    // border: lightgray;
-    // border-radius: 4px;
+        .grid-container{
+        display: grid;
+        // grid-template-columns: repeat(5,1fr);
+        // margin: 0vh 6vw;
+        .main-card{
+            margin: 15px;
+            width: 200px;
+            height: 275px;
+            box-shadow: -1px -1px 4px gray;
+            border: lightgray;
+            border-radius: 4px;
+    //  .card{
+        // margin: 15px;
+        // width: 200px;
+        // height: 220px;
+        // box-shadow: -1px -1px 4px gray;
+        // border: lightgray;
+        // border-radius: 4px;
     
-    span{
-        display: block;
-        margin: .4vh 0vw;  
-    }
-    .book-container{
-        background-color:#F5F5F5;
-        height: 120px;
-
-        .image{
-            height: 100px;
-            margin: 2vh 0vw 2vh 0vw;   
-        }
-
-    }
-
-    .text-containt{
-        margin: 2vh 0vw 0vh 1vw ;
-        width: 85%;  
-        .title{
-            text-align: left;
-            #title1{
-                font: normal normal normal 14px Roboto;
-                letter-spacing: 0px;
-                color: #0A0102;
+            span{
+                display: block;
+                margin: .4vh 0vw;  
             }
-            #title2{
-                font: normal normal normal 10px Roboto;
-                letter-spacing: 0px;
-                color: #878787;         
+            .book-container{
+                background-color:#F5F5F5;
+                height: 170px;
+
+                .image{
+                    height: 140px;
+                    margin: 2vh 0vw 2vh 0vw;   
+                }
+
             }
-            .rating{
-                display: flex;
-                text-align: center;
-                #number1{
-                    background-color: #388E3C;
-                    color: white;
+
+        .text-containt{
+            margin: 2vh 0vw 0vh 1vw ;
+            width: 85%;  
+            .title{
+                text-align: left;
+                #title1{
+                    font: normal normal normal 14px Roboto;
                     letter-spacing: 0px;
-                    font-size: 12px;
-                    width: 30px;
+                    color: #0A0102;
                 }
-                #number2{     
-                    color:#878787;
+                #title2{
+                    font: normal normal normal 10px Roboto;
                     letter-spacing: 0px;
-                    font-size: 10px;
+                    color: #878787;         
                 }
-            }
-            .price-container{
-                display: flex;
-                text-align: center;
-                width: 75px;
-                #rs{
-                    font-weight: bold;
-                   font-size:12px;
+                .rating{
+                    display: flex;
+                    text-align: center;
+                    #number1{
+                        background-color: #388E3C;
+                        color: white;
+                        letter-spacing: 0px;
+                        font-size: 12px;
+                        width: 30px;
+                    }
+                    #number2{     
+                        color:#878787;
+                        letter-spacing: 0px;
+                        font-size: 10px;
+                    }
                 }
-                #new-price{
-                    font-weight: bold;
-                    font-size:12px; 
+                .price-container{
+                    display: flex;
+                    text-align: center;
+                    width: 75px;
+                    #rs{
+                        font-weight: bold;
+                    font-size:12px;
+                    }
+                    #new-price{
+                        font-weight: bold;
+                        font-size:12px; 
+                    }
+                    #old-price{
+                        color: #878787;
+                        font-size:10px;
+                        text-decoration: line-through; 
+                    }
                 }
-                #old-price{
-                    color: #878787;
-                    font-size:10px;
-                    text-decoration: line-through; 
-                }
-            }
-            .buttonsq{
-                display: flex;
-                width: 100%;
-                .bottom-button{
+                .buttonsq{
                     display: flex;
                     width: 100%;
-                    justify-content: space-evenly;
-                    .button-left{  
-                        width: 90%; 
-                        height: 25px;
-                        background-color: #A03037;
-                        border: 0px;
-                        border-radius: 3px;
-                        color:white;
-                        font-size: x-small;
+                    .bottom-button{
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-evenly;
+                        .button-left{  
+                            width: 90%; 
+                            height: 25px;
+                            background-color: #A03037;
+                            border: 0px;
+                            border-radius: 3px;
+                            color:white;
+                            font-size: x-small;
+                        }
+                        .button-right{
+                            width: 90%;
+                            height: 25px;
+                            background-color: white;
+                            border : 2px solid #8b8888;
+                            border-radius: 3px;
+                            font-size: x-small;
+                        } 
                     }
-                    .button-right{
-                        width: 90%;
-                        height: 25px;
-                        background-color: white;
-                        border : 2px solid #8b8888;
-                        border-radius: 3px;
-                        font-size: x-small;
-                    } 
                 }
-            }
-            .add_button{
-                width: 100%;  
-                height: 25px;
-                background-color: #3371B5;
-                border: 0px;
-                border-radius: 3px;
-                color:white;
-                font-size: x-small;
-            }
+                .add_button{
+                    width: 100%;  
+                    height: 25px;
+                    background-color: #3371B5;
+                    border: 0px;
+                    border-radius: 3px;
+                    color:white;
+                    font-size: x-small;
+                }
         
+            }
         }
-    }
 
     }
 }

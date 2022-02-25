@@ -21,27 +21,6 @@ export class Books extends Component {
         }
     }
 
-    handleClick(event) {
-        this.setState({
-            currentPage: Number(event.target.id)
-        });
-        this.Pagination();
-    }
-
-    Pagination=()=>{
-        console.log(this.state.currentPage);
-        const indexOfLastTodo = this.state.currentPage * this.state.booksPerPage;
-        const indexOfFirstTodo = indexOfLastTodo - this.state.booksPerPage;
-        this.state.booklistArray = this.state.tempbooklistArray
-        this.state.booklistArray = this.state.booklistArray.slice(indexOfFirstTodo, indexOfLastTodo);
-        this.state.bookCount = this.state.booklistArray.length
-        this.props.booksCount(this.state.bookCount)
-    }
-
-    // booksLength=(item)=>{
-    //     this.props.booksCount(item)
-    // }
-
     componentDidMount() {
         this.getbooklist();
     }
@@ -62,13 +41,13 @@ export class Books extends Component {
             })
     }
 
-    addBooktoWishlist = (item) => {
+    addBooktoWishlist = (_ProductID) => {
         let data = {
-            "product_id": item,
+            "product_id": _ProductID,
         }
         service.addWishlist(data)
             .then(res => {
-                let result = this.state.booklistArray.find(i => i._id == item)
+                let result = this.state.booklistArray.find(i => i._id == _ProductID)
                 this.state.addedtoWishlist.push(result)
                 this.props.wishlistCount(this.state.addedtoWishlist)
                 console.log(res);
@@ -94,7 +73,6 @@ export class Books extends Component {
     itemisExists = (data) => {
         let addtocart = this.state.addedtoBag.some(item => data._id === item._id)
         return addtocart
-
     }
 
     itemisWishlist = (data) => {
@@ -113,6 +91,9 @@ export class Books extends Component {
         this.state.booklistArray = this.state.tempbooklistArray
         let matches = this.state.booklistArray.filter(v => v.bookName.toLowerCase().includes(val));
         this.state.booklistArray = matches
+
+        this.state.bookCount = this.state.booklistArray.length
+        this.props.booksCount(this.state.bookCount)
     }
 
     getsort = (item) => {
@@ -129,16 +110,32 @@ export class Books extends Component {
             })
         }
         this.state.booklistArray = sortedProductsAsc
+        this.Pagination();
     }
-    render() {
 
+    handleClick(event) {
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
+        this.Pagination();
+    }
+
+    Pagination=()=>{
+        const indexOfLastTodo = this.state.currentPage * this.state.booksPerPage;
+        const indexOfFirstTodo = indexOfLastTodo - this.state.booksPerPage;
+        this.state.booklistArray = this.state.tempbooklistArray
+        this.state.booklistArray = this.state.booklistArray.slice(indexOfFirstTodo, indexOfLastTodo);
+        this.state.bookCount = this.state.booklistArray.length
+        this.props.booksCount(this.state.bookCount)
+    }
+
+    render() {
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(this.state.tempbooklistArray.length / this.state.booksPerPage); i++) {
             pageNumbers.push(i);
         }
 
         const renderPageNumbers = pageNumbers.map(number => {
-            console.log(number);
             return (
                 <div
                     key={number}
