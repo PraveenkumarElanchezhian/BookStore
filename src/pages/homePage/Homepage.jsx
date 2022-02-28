@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../header/Header';
 import homepage1 from '../../Images/homepage1.png';
 import homepage2 from '../../Images/homepage2.png';
+import { Redirect } from "react-router-dom";
 import './Homepage.scss';
 export class Homepage extends Component {
     constructor(props) {
@@ -14,15 +15,22 @@ export class Homepage extends Component {
         locality: '',
         fullAddress: localStorage.getItem('_fullAddress'),
         city: '',
-        landmark: ''
+        landmark: '',
+        redirect:null
       }
     }
     
     continueShopping=()=>{
-        window.open("/login", "_self");
+
+        this.setState ({
+            redirect: "/dashboard"
+        })
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect} />
+          }
         return (
             <div className='header'>
                 <Header />

@@ -45,7 +45,8 @@ export class MyCart extends Component {
       custLocalityError: '',
       custAddressError: '',
       custCityError: '',
-      custLandmarkError: ''
+      custLandmarkError: '',
+      myWishlistArray:[]
     }
   }
   
@@ -123,6 +124,7 @@ export class MyCart extends Component {
 
   componentDidMount() {
     this.getmycartlist();
+    this.getmyWishlist();
   }
 
   getmycartlist = () => {
@@ -132,6 +134,20 @@ export class MyCart extends Component {
         this.setState({
           mycartArray: res.data.result
         })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  getmyWishlist = () => {
+    service.getWishlist()
+      .then(res => {
+        console.log(res);
+        this.setState({
+          myWishlistArray: res.data.result
+        })
+        console.log(this.state.myWishlistArray);
       })
       .catch(err => {
         console.log(err);
@@ -228,7 +244,7 @@ export class MyCart extends Component {
     }
     return (
       <div className='carts-container'>
-        <Header cartlistCount={this.state.mycartArray.length} />
+        <Header cartlistCount={this.state.mycartArray.length}  wishlistCount={this.state.myWishlistArray.length}/>
         <h3 className='heading'></h3>
         <div className='mycart-container'>
           <div className='carts'>
@@ -256,11 +272,11 @@ export class MyCart extends Component {
                     </div>
                   </div>
                 </div>
-                <div className='buttonn'>
-                  <button className='order' onClick={this.openCustomerDetails}>PLACE ORDER</button>
-                </div>
               </div>
             ))}
+              <div className='buttonn'>
+                  <button className='order' onClick={this.openCustomerDetails}>PLACE ORDER</button>
+                </div>
           </div>
           {this.state.opencustomerpage == false ?
             <div className='customer-details'  >

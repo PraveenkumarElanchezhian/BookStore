@@ -15,12 +15,14 @@ export class Wishlist extends Component {
 
     this.state = {
       myWishlistArray: [],
+      mycartArray:[],
       redirect:null
     }
   }
 
   componentDidMount() {
     this.getmyWishlist();
+    this.getmycartlist();
   }
 
   getmyWishlist = () => {
@@ -29,6 +31,19 @@ export class Wishlist extends Component {
         console.log(res);
         this.setState({
           myWishlistArray: res.data.result
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  getmycartlist = () => {
+    service.getCart()
+      .then(res => {
+        console.log(res);
+        this.setState({
+          mycartArray: res.data.result
         })
       })
       .catch(err => {
@@ -55,6 +70,7 @@ export class Wishlist extends Component {
   service.addCart(data)
       .then(res => {
           console.log(res);
+          this.removeWishlistItems(item)
           this.setState ({
             redirect: "/myCart"
         })
@@ -71,7 +87,7 @@ export class Wishlist extends Component {
     }
     return (
       <div className='wishlist-container'>
-        <Header wishlistCount={this.state.myWishlistArray.length} />
+        <Header wishlistCount={this.state.myWishlistArray.length}  cartlistCount={this.state.mycartArray.length} />
         <div className='wish_list'>
           <div className='wishlist'>
             <div className='button'>
