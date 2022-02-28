@@ -112,7 +112,6 @@ export class Login extends Component {
 
       service.Signup(data)
         .then(res => {
-          console.log(res);
           this.setState({
             redirect: "/login"
           })
@@ -144,7 +143,6 @@ export class Login extends Component {
 
               <div className="section-1">
                 <h1 className="heading" onClick={this.handleOpen}>LOGIN</h1>
-
                 <h1 className="headings" onClick={this.handleClose}>SIGNUP</h1>
               </div>
 

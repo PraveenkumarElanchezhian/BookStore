@@ -3,7 +3,6 @@ import './Books.scss';
 import book2 from '../../Images/book2.png';
 import UserService from '../../Service/UserService';
 import { display } from '@mui/system';
-import Pagination from '../pagination/Pagination';
 const service = new UserService();
 
 export class Books extends Component {
@@ -17,13 +16,13 @@ export class Books extends Component {
             tempbooklistArray: [],
             currentPage: 1,
             booksPerPage: 10,
-            bookCount:0
+            bookCount: 0
         }
     }
 
     componentDidMount() {
         this.getbooklist();
-        this.getmycartlist(); 
+        this.getmycartlist();
         this.getmyWishlist();
     }
 
@@ -36,7 +35,6 @@ export class Books extends Component {
                 let result = this.state.booklistArray.find(i => i._id == item)
                 this.state.addedtoBag.push(result)
                 this.props.childToParent(this.state.addedtoBag)
-                console.log(res);
             })
             .catch(err => {
                 console.log(err);
@@ -52,7 +50,6 @@ export class Books extends Component {
                 let result = this.state.booklistArray.find(i => i._id == _ProductID)
                 this.state.addedtoWishlist.push(result)
                 this.props.wishlistCount(this.state.addedtoWishlist)
-                console.log(res);
             })
             .catch(err => {
                 console.log(err);
@@ -75,33 +72,29 @@ export class Books extends Component {
 
     getmyWishlist = () => {
         service.getWishlist()
-          .then(res => {
-            console.log(res);
-            this.setState({
-                addedtoWishlist : res.data.result
+            .then(res => {
+                this.setState({
+                    addedtoWishlist: res.data.result
+                })
+                this.props.wishlistCount(this.state.addedtoWishlist)
             })
-            this.props.wishlistCount(this.state.addedtoWishlist)
-            console.log(this.state.addedtoWishlist);
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      }
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
-      getmycartlist = () => {
+    getmycartlist = () => {
         service.getCart()
-          .then(res => {
-            console.log(res);
-            this.setState({
-                addedtoBag : res.data.result
+            .then(res => {
+                this.setState({
+                    addedtoBag: res.data.result
+                })
+                this.props.childToParent(this.state.addedtoBag)
             })
-            this.props.childToParent(this.state.addedtoBag)
-            console.log(this.state.addedtoBag);
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      }
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     itemisExists = (data) => {
         let addtocart = this.state.addedtoBag.some(item => data._id === item._id)
@@ -153,7 +146,7 @@ export class Books extends Component {
         this.Pagination();
     }
 
-    Pagination=()=>{
+    Pagination = () => {
         const indexOfLastTodo = this.state.currentPage * this.state.booksPerPage;
         const indexOfFirstTodo = indexOfLastTodo - this.state.booksPerPage;
         this.state.booklistArray = this.state.tempbooklistArray
@@ -194,14 +187,14 @@ export class Books extends Component {
                                         <div className="title">
                                             <span id='title1'>{item.bookName}</span>
                                             <span id='title2'>{item.author}</span>
-                                           
+
                                             <div className="price-container">
                                                 <span id='rs'>Rs.</span>
                                                 <span id='new-price'>{item.price}</span>
                                             </div>
-                                            
+
                                             <div className='buttonsq'>
-                                                <div className={this.itemisExists(item) == false ? this.itemisWishlist(item) == true ? 'visibility': 'clickbutton' : 'clickbuttons'}>
+                                                <div className={this.itemisExists(item) == false ? this.itemisWishlist(item) == true ? 'visibility' : 'clickbutton' : 'clickbuttons'}>
                                                     {this.itemisExists(item) == false ?
                                                         <div className='bottom-button'>
                                                             <button className='button-left' value={item._id} onClick={(event) => this.addBooktoCart(event.target.value)}>ADD TO BAG</button>
@@ -211,7 +204,7 @@ export class Books extends Component {
                                                     }
                                                 </div>
 
-                                                <div className={this.itemisWishlist(item) == true ? 'visiblebutton': this.itemisExists(item) == true ? "visibility" : 'visibilityy' }>
+                                                <div className={this.itemisWishlist(item) == true ? 'visiblebutton' : this.itemisExists(item) == true ? "visibility" : 'visibilityy'}>
                                                     {this.itemisWishlist(item) == false ?
                                                         <div className='bottom-button'>
                                                             <button className='button-right' value={item._id} onClick={(event) => this.addBooktoWishlist(event.target.value)}>WISHLIST</button>
@@ -230,14 +223,10 @@ export class Books extends Component {
                 </div>
                 <div className='pagination'>
                     <div className='pagination-container'>
-                        {/* <ul>
-                            {renderTodos}
-                        </ul> */}
                         <div id="page-numbers" className='page-numbers'>
                             {renderPageNumbers}
                         </div>
                     </div>
-                    {/* <Pagination/> */}
                 </div>
             </div>
 

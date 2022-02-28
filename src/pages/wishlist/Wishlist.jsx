@@ -28,7 +28,6 @@ export class Wishlist extends Component {
   getmyWishlist = () => {
     service.getWishlist()
       .then(res => {
-        console.log(res);
         this.setState({
           myWishlistArray: res.data.result
         })
@@ -41,7 +40,6 @@ export class Wishlist extends Component {
   getmycartlist = () => {
     service.getCart()
       .then(res => {
-        console.log(res);
         this.setState({
           mycartArray: res.data.result
         })
@@ -52,10 +50,8 @@ export class Wishlist extends Component {
   }
 
   removeWishlistItems = (item) => {
-    console.log(item);
     service.deleteWishlist(item)
       .then(res => {
-        console.log(res);
         this.getmyWishlist();
       })
       .catch(err => {
@@ -69,7 +65,6 @@ export class Wishlist extends Component {
   }
   service.addCart(data)
       .then(res => {
-          console.log(res);
           this.removeWishlistItems(item)
           this.setState ({
             redirect: "/myCart"

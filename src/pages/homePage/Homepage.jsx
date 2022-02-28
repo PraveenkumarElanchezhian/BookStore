@@ -3,7 +3,10 @@ import Header from '../header/Header';
 import homepage1 from '../../Images/homepage1.png';
 import homepage2 from '../../Images/homepage2.png';
 import { Redirect } from "react-router-dom";
+import UserService from '../../Service/UserService';
 import './Homepage.scss';
+const service = new UserService();
+
 export class Homepage extends Component {
     constructor(props) {
       super(props)
@@ -21,12 +24,11 @@ export class Homepage extends Component {
     }
     
     continueShopping=()=>{
-
         this.setState ({
             redirect: "/dashboard"
         })
     }
-
+    
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />

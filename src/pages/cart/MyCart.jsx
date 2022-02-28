@@ -46,7 +46,8 @@ export class MyCart extends Component {
       custAddressError: '',
       custCityError: '',
       custLandmarkError: '',
-      myWishlistArray:[]
+      myWishlistArray:[],
+      addressType:''
     }
   }
   
@@ -88,7 +89,7 @@ export class MyCart extends Component {
   updateCartItems = (_id, data) => {
     service.updateCart(_id, data)
       .then(res => {
-        console.log(res);
+
       })
       .catch(err => {
         console.log(err);
@@ -115,7 +116,7 @@ export class MyCart extends Component {
     this.setState({ quantity: event.target.value });
     service.updateCart()
       .then(res => {
-        console.log(res);
+      
       })
       .catch(err => {
         console.log(err);
@@ -130,7 +131,7 @@ export class MyCart extends Component {
   getmycartlist = () => {
     service.getCart()
       .then(res => {
-        console.log(res);
+      
         this.setState({
           mycartArray: res.data.result
         })
@@ -143,15 +144,21 @@ export class MyCart extends Component {
   getmyWishlist = () => {
     service.getWishlist()
       .then(res => {
-        console.log(res);
         this.setState({
           myWishlistArray: res.data.result
         })
-        console.log(this.state.myWishlistArray);
       })
       .catch(err => {
         console.log(err);
       })
+  }
+
+  remove=()=> {
+    {this.state.mycartArray.map((item, i) => {
+      if(item._id !== undefined){
+        this.removeCartItems(item._id);
+      }                  
+   })}
   }
 
   checkout = () => {
@@ -172,8 +179,8 @@ export class MyCart extends Component {
     };
     service.addOrder(data)
       .then(res => {
-        console.log(res);
         this.getmycartlist();
+        this.remove();
         this.setState({
           redirect: "/homepage"
         })
@@ -198,7 +205,6 @@ export class MyCart extends Component {
   removeCartItems = (item) => {
     service.deleteCart(item)
       .then(res => {
-        console.log(res);
         this.getmycartlist();
       })
       .catch(err => {
@@ -212,11 +218,19 @@ export class MyCart extends Component {
     });
   }
 
+  changeRadiofields = (e) => {
+    let result = e.target.value
+    this.setState({
+      addressType :result,
+    });
+  }
+
   Continue = () => {
     var validated = this.custValidation();
     if (!validated) {
+    
       let data = {
-        "addressType": "Home",
+        "addressType": this.state.addressType,
         // "fullName": this.state.fullName,
         // "phonenumber": this.state.phonenumber,
         // "pincode": this.state.pincode,
@@ -227,7 +241,7 @@ export class MyCart extends Component {
       }
       service.customerDetails(data)
         .then(res => {
-          console.log(res);
+        
         })
         .catch(err => {
           console.log(err);
@@ -317,14 +331,14 @@ export class MyCart extends Component {
                   <FormControl>
                     <FormLabel className='type'>Type</FormLabel>
                     <RadioGroup className='radiogroup'>
-                      <FormControlLabel value="Home" control={<Radio />} label="Home" />
-                      <FormControlLabel value="Work" control={<Radio />} label="Work" />
-                      <FormControlLabel value="other" control={<Radio />} label="Other" />
+                      <FormControlLabel name='addresstype' value="Home" control={<Radio />} label="Home" onChange={(e) => this.changeRadiofields(e)} />
+                      <FormControlLabel name='addresstype' value="Office" control={<Radio />} label="Office" onChange={(e) => this.changeRadiofields(e)} />
+                      <FormControlLabel name='addresstype' value="Other" control={<Radio />} label="Other" onChange={(e) => this.changeRadiofields(e)} />
                     </RadioGroup>
                   </FormControl>
                 </div>
                 <div className='buttons'>
-                  <button className='continue-button' onClick={(event) => this.Continue(event)}  /* onClick={this.openOrderDetails} */ >Continue</button>
+                  <button className='continue-button' onClick={(event) => this.Continue(event)}>Continue</button>
                 </div>
               </div>
             </div>
