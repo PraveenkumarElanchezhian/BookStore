@@ -21,9 +21,10 @@ export class Books extends Component {
     }
 
     componentDidMount() {
-        this.getbooklist();
         this.getmycartlist();
         this.getmyWishlist();
+        this.getbooklist();
+        
     }
 
     addBooktoCart = (item) => {
@@ -74,7 +75,7 @@ export class Books extends Component {
         service.getWishlist()
             .then(res => {
                 this.setState({
-                    addedtoWishlist: res.data.result
+                    addedtoWishlist: this.getWishlistData(res.data.result)
                 })
                 this.props.wishlistCount(this.state.addedtoWishlist)
             })
@@ -83,17 +84,31 @@ export class Books extends Component {
             })
     }
 
+    getWishlistData=(data)=>{
+        let val = data.map(item=>{
+        return item.product_id
+        })
+        return val
+    }
+    
     getmycartlist = () => {
         service.getCart()
             .then(res => {
                 this.setState({
-                    addedtoBag: res.data.result
+                    addedtoBag: this.getCartData(res.data.result)
                 })
                 this.props.childToParent(this.state.addedtoBag)
             })
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    getCartData=(data)=>{
+       let val = data.map(item=>{
+        return item.product_id
+        })
+        return val
     }
 
     itemisExists = (data) => {
@@ -213,7 +228,7 @@ export class Books extends Component {
                                                         <button className='add_button'>ADDED TO WISHLIST</button>
                                                     }
                                                 </div>
-                                            </div>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
