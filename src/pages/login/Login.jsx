@@ -29,7 +29,7 @@ export class Login extends Component {
       redirect: null
     }
   }
-  
+
   handleOpen = () => {
     this.setState({
       openPage: true,
@@ -127,63 +127,65 @@ export class Login extends Component {
       return <Redirect to={this.state.redirect} />
     }
     return (
-      <div className="login-container">
-        <div className="Image-container">
-          <div className="Image-left">
-            <img className="Image-dimension" src={logo} alt='image logo' />
-            <h4>ONLINE BOOK SHOPPING</h4>
-          </div>
-          <div className="Image-Right">
+      <>
+        <div className="login-container">
+          <div className="Image-container">
+            <div className="Image-left">
+              <img className="Image-dimension" src={logo} alt='image logo' />
+              <h4>ONLINE BOOK SHOPPING</h4>
+            </div>
+            <div className="Image-Right">
 
+            </div>
           </div>
+          {
+            this.state.openPage ?
+              <div className="login">
+
+                <div className="section-1">
+                  <h1 className="heading" onClick={this.handleOpen}>LOGIN</h1>
+                  <h1 className="headings" onClick={this.handleClose}>SIGNUP</h1>
+                </div>
+
+                <div className="section-2">
+                  <TextField name="loginemail" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
+                  <TextField name="loginpassword" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
+                </div>
+
+                <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.login(event)}> Login </button>
+
+                <p className='strick'>-----------OR-----------</p>
+
+                <div className='buttom-button'>
+                  <Button className='fb-button' style={{ backgroundColor: '#4266B2' }} variant="contained">Facebook</Button>
+                  <Button className='google-button' variant="contained">Google</Button>
+                </div>
+
+              </div>
+              :
+              <div className="signup">
+
+                <div className="signup-section-1">
+                  <h1 className="signup-heading" onClick={this.handleOpen}>LOGIN</h1>
+                  <h1 className="signup-headings" onClick={this.handleClose}>SIGNUP</h1>
+                </div>
+
+                <div className="signup-section-2">
+                  <TextField name="fullName" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="FullName" variant="outlined" error={this.state.fullNameError} helperText={this.state.fullNameError ? "Enter a fullname" : " "} onChange={(e) => this.changeHandle(e)} />
+                  <TextField name="email" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.emailError} helperText={this.state.emailError ? "Enter an email" : " "} onChange={(e) => this.changeHandle(e)} />
+                </div>
+
+                <div className="signup-section-3">
+                  <TextField name="password" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.passwordError} helperText={this.state.passwordError ? "Enter a password" : " "} onChange={(e) => this.changeHandle(e)} />
+                  <TextField name="phone" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Mobile Number" variant="outlined" error={this.state.phoneError} helperText={this.state.phoneError ? "Enter a mobile number" : " "} onChange={(e) => this.changeHandle(e)} />
+                </div>
+
+                <button className='login-btn' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.Signup(event)}> Signup </button>
+
+              </div>
+          }
         </div>
-        {
-          this.state.openPage ?
-            <div className="login">
-
-              <div className="section-1">
-                <h1 className="heading" onClick={this.handleOpen}>LOGIN</h1>
-                <h1 className="headings" onClick={this.handleClose}>SIGNUP</h1>
-              </div>
-
-              <div className="section-2">
-                <TextField name="loginemail" className="email-box" type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.loginemailError} helperText={this.state.loginemailError ? "Enter a correct email" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="loginpassword" className="pass-box" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.loginpasswordError} helperText={this.state.loginpasswordError ? "Enter a correct password" : " "} onChange={(e) => this.changeHandle(e)} />
-              </div>
-
-              <button className='login-button' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.login(event)}> Login </button>
-
-              <p className='strick'>-----------OR-----------</p>
-
-              <div className='buttom-button'>
-                <Button className='fb-button' style={{ backgroundColor: '#4266B2' }} variant="contained">Facebook</Button>
-                <Button className='google-button' variant="contained">Google</Button>
-              </div>
-
-            </div>
-            :
-            <div className="signup">
-
-              <div className="signup-section-1">
-                <h1 className="signup-heading" onClick={this.handleOpen}>LOGIN</h1>
-                <h1 className="signup-headings" onClick={this.handleClose}>SIGNUP</h1>
-              </div>
-
-              <div className="signup-section-2">
-                <TextField name="fullName" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="FullName" variant="outlined" error={this.state.fullNameError} helperText={this.state.fullNameError ? "Enter a fullname" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="email" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Email Id" variant="outlined" error={this.state.emailError} helperText={this.state.emailError ? "Enter an email" : " "} onChange={(e) => this.changeHandle(e)} />
-              </div>
-
-              <div className="signup-section-3">
-                <TextField name="password" className="email-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="password" variant="outlined" error={this.state.passwordError} helperText={this.state.passwordError ? "Enter a password" : " "} onChange={(e) => this.changeHandle(e)} />
-                <TextField name="phone" className="pass-npt" style={{ backgroundColor: 'white' }} type='text' id="outlined-email" label="Mobile Number" variant="outlined" error={this.state.phoneError} helperText={this.state.phoneError ? "Enter a mobile number" : " "} onChange={(e) => this.changeHandle(e)} />
-              </div>
-
-              <button className='login-btn' style={{ backgroundColor: '#A03037' }} onClick={(event) => this.Signup(event)}> Signup </button>
-
-            </div>
-        }
-      </div>
+      </>
     )
   }
 }

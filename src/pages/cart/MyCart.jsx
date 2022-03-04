@@ -112,17 +112,6 @@ export class MyCart extends Component {
     this.updateCartItems(item._id, data)
   }
 
-  handleChange = (event) => {
-    this.setState({ quantity: event.target.value });
-    service.updateCart()
-      .then(res => {
-      
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
   componentDidMount() {
     this.getmycartlist();
     this.getmyWishlist();
@@ -351,7 +340,7 @@ export class MyCart extends Component {
             <div className='order_summary'>
               <div className='mycartt'>Order Summary</div>
               {this.state.mycartArray.map((item, index) => (
-                <div >
+                <>
                   <div className='content-container'>
                     <img className='image_style' src={book1} alt="image" />
                     <div className='cart-description'>
@@ -360,11 +349,11 @@ export class MyCart extends Component {
                       <div className='bookprice'>Rs. {item.product_id.price}</div>
                     </div>
                   </div>
-                  <div className='buttonss'>
+                </>
+              ))}
+              <div className='buttonss'>
                     <button className='order' onClick={(event) => this.checkout(event)}>CHECKOUT</button>
                   </div>
-                </div>
-              ))}
             </div>
           }
         </div>

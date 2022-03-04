@@ -189,12 +189,12 @@ export class Books extends Component {
         });
 
         return (
-            <div >
+            < >
                 <div className='body'>
                     {this.state.booklistArray.map((item, index) => (
                         <div className='grid-container'>
                             <div className="main-card">
-                                <div className='card' className='displayGrid' >
+                                <div className='card'>
                                     <div className="book-container">
                                         <img className="image" src={book2} alt='book image' />
                                     </div>
@@ -243,7 +243,7 @@ export class Books extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
 
         )
     }
